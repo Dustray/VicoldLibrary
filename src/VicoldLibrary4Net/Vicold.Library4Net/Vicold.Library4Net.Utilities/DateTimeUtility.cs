@@ -98,5 +98,47 @@ namespace Vicold.Library4Net.Utilities
                 throw new FormatException("转换失败：输入日期串未匹配到默认日期格式，请使用自定义格式化字符串转换方法");
             }
         }
+
+        /// <summary>
+        /// 日期转Unix时间戳（到秒）
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        public static long ToUnixTimestamp(DateTime dateTime)
+        {
+            System.DateTime startTime = TimeZoneInfo.ConvertTimeFromUtc(new System.DateTime(1970, 1, 1), TimeZoneInfo.Local); // 当地时区
+            return (long)(dateTime - startTime).TotalSeconds; // 相差秒数
+        }
+        /// <summary>
+        /// Unix时间戳转日期（到秒）
+        /// </summary>
+        /// <param name="unixTimeStamp"></param>
+        /// <returns></returns>
+        public static DateTime FromUnixTimestamp(long unixTimeStamp)
+        {
+            System.DateTime startTime = TimeZoneInfo.ConvertTimeFromUtc(new System.DateTime(1970, 1, 1), TimeZoneInfo.Local); // 当地时区
+            return startTime.AddSeconds(unixTimeStamp);
+        }
+
+        /// <summary>
+        /// 日期转JavaScript时间戳（到毫秒）
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        public static long ToJSTimestamp(DateTime dateTime)
+        {
+            System.DateTime startTime = TimeZoneInfo.ConvertTimeFromUtc(new System.DateTime(1970, 1, 1), TimeZoneInfo.Local); // 当地时区
+            return (long)(dateTime - startTime).TotalMilliseconds; // 相差毫秒数
+        }
+        /// <summary>
+        /// JavaScript时间戳转日期（到毫秒）
+        /// </summary>
+        /// <param name="jsTimeStamp"></param>
+        /// <returns></returns>
+        public static DateTime FromJSTimestamp(long jsTimeStamp)
+        {
+            System.DateTime startTime = TimeZoneInfo.ConvertTimeFromUtc(new System.DateTime(1970, 1, 1), TimeZoneInfo.Local); // 当地时区
+            return startTime.AddMilliseconds(jsTimeStamp);
+        }
     }
 }

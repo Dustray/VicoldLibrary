@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.Library4Net.Utilitie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.Library4Net.TestConsole", "Vicold.Library4Net.TestConsole\Vicold.Library4Net.TestConsole.csproj", "{F4070AEC-7878-400C-AAEE-518411D89FE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.Library4Net.Service", "Vicold.Library4Net.Service\Vicold.Library4Net.Service.csproj", "{24746351-D793-4B1C-B6EE-5324E3FEEAF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

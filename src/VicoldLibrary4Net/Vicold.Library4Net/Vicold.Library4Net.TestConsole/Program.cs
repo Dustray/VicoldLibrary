@@ -12,6 +12,7 @@ namespace Vicold.Library4Net.TestConsole
         static void Main(string[] args)
         {
             var c = ColorUtility.ToColorFromStr16("#345jdd32");
+            var c16 = ColorUtility.ToStr16FromColor(System.Drawing.Color.LightSlateGray);
         }
     }
 }

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.Library4NetCore.Utilities", "Vicold.Library4NetCore.Utilities\Vicold.Library4NetCore.Utilities.csproj", "{EA391557-4665-4047-A84F-3F2CB4DFA44A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.Library4NetCore.TestConsole", "Vicold.Library4NetCore.TestConsole\Vicold.Library4NetCore.TestConsole.csproj", "{00C3C7B8-AA69-40DA-912F-FC901D1B343D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA391557-4665-4047-A84F-3F2CB4DFA44A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA391557-4665-4047-A84F-3F2CB4DFA44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA391557-4665-4047-A84F-3F2CB4DFA44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA391557-4665-4047-A84F-3F2CB4DFA44A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00C3C7B8-AA69-40DA-912F-FC901D1B343D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00C3C7B8-AA69-40DA-912F-FC901D1B343D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00C3C7B8-AA69-40DA-912F-FC901D1B343D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00C3C7B8-AA69-40DA-912F-FC901D1B343D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE66E6DA-EFDF-4112-941F-B903FF7F7484}
+	EndGlobalSection
+EndGlobal

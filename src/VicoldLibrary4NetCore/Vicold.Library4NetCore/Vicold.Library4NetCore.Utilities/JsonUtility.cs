@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Vicold.Library4Net.Utilities
+namespace Vicold.Library4NetCore.Utilities
 {
     /// <summary>
     /// Json（文件）与实体类的映射

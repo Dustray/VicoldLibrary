@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Vicold.Library4Net.Utilities
+namespace Vicold.Library4NetCore.Utilities
 {
     /// <summary>
     /// XML与实体、JSON的映射类

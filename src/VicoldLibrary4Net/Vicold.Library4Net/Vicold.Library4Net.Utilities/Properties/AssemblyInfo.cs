@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Vicold.Library4Net.Utilities")]
-[assembly: AssemblyCopyright("Copyright ©  2020 vidold.com")]
+[assembly: AssemblyCopyright("Copyright ©  2020 vicold.com")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

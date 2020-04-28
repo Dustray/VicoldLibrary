@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.Library4Net.Utilities", "Vicold.Library4Net.Utilities\Vicold.Library4Net.Utilities.csproj", "{4A16610E-54D5-4D53-ACB2-164A40ECD225}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.Library4Net.TestConsole", "Vicold.Library4Net.TestConsole\Vicold.Library4Net.TestConsole.csproj", "{F4070AEC-7878-400C-AAEE-518411D89FE8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.Library4Net.Service", "Vicold.Library4Net.Service\Vicold.Library4Net.Service.csproj", "{24746351-D793-4B1C-B6EE-5324E3FEEAF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.UnitTest", "Vicold.UnitTest\Vicold.UnitTest.csproj", "{42B67CDC-39BE-48AE-92F4-0209867EA1C1}"
@@ -21,10 +19,6 @@ Global
 		{4A16610E-54D5-4D53-ACB2-164A40ECD225}.Debug|x64.Build.0 = Debug|x64
 		{4A16610E-54D5-4D53-ACB2-164A40ECD225}.Release|x64.ActiveCfg = Release|x64
 		{4A16610E-54D5-4D53-ACB2-164A40ECD225}.Release|x64.Build.0 = Release|x64
-		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Debug|x64.ActiveCfg = Debug|x64
-		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Debug|x64.Build.0 = Debug|x64
-		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Release|x64.ActiveCfg = Release|x64
-		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Release|x64.Build.0 = Release|x64
 		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Debug|x64.ActiveCfg = Debug|x64
 		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Debug|x64.Build.0 = Debug|x64
 		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Release|x64.ActiveCfg = Release|x64

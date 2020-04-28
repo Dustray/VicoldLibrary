@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -38,6 +39,40 @@ namespace Vicold.Library4NetCore.Utilities
                 //比较两个哈希值
                 return BitConverter.ToString(buffer1) == BitConverter.ToString(buffer2) ? true : false;
             }
+        }
+
+        /// <summary>
+        /// 获取文件夹中最新的文件
+        /// </summary>
+        /// <param name="folderPath"></param>
+        /// <param name="pattern"></param>
+        /// <returns></returns>
+        public static FileInfo FindLatestFile(string folderPath, string pattern = null)
+        {
+            var files = FindAllFile(folderPath, pattern);
+            if (null == files || 0 == files.Length) return null;
+            files = files.OrderByDescending(v => v.CreationTime).ToArray();
+            if (files.Length == 0) return null;
+            return files.First();
+        }
+
+        /// <summary>
+        /// 获取文件夹中所有的文件
+        /// </summary>
+        /// <param name="folderPath"></param>
+        /// <param name="pattern"></param>
+        /// <returns></returns>
+        public static FileInfo[] FindAllFile(string folderPath, string pattern = null)
+        {
+            if (!Directory.Exists(folderPath)) return null;
+            var root = new DirectoryInfo(folderPath);
+            FileInfo[] files;
+            if (null == pattern)
+                files = root.GetFiles();
+            else
+                files = root.GetFiles(pattern);
+            if (0 == files.Length) return null;
+            return files;
         }
     }
 }

@@ -32,7 +32,8 @@ namespace Vicold.Library4NetCore.Utilities
 
         /// <summary>
         /// 使用默认格式转换为DateTime
-        /// <para>yyMMddHH</para>
+        /// <para>yyMMdd</para>
+        /// <para>yyyyMMdd</para>
         /// <para>yy-MM-dd HH</para>
         /// <para>yyyyMMddHH</para>
         /// <para>yyyy-MM-dd HH</para>
@@ -56,8 +57,11 @@ namespace Vicold.Library4NetCore.Utilities
                 var formatter = "yyyyMMddHHmmss";
                 switch (dateStr.Length)
                 {
+                    case 6:
+                        formatter = "yyMMdd";
+                        break;
                     case 8:
-                        formatter = "yyMMddHH";
+                        formatter = "yyyyMMdd";
                         break;
                     case 11:
                         formatter = "yy-MM-dd HH";

@@ -63,7 +63,7 @@ namespace Vicold.Library4Net.Utilities
         }
 
         /// <summary>
-        /// 
+        /// 实体类映射到Json文件
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="jsonPath"></param>

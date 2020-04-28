@@ -9,24 +9,30 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.Library4Net.TestCons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.Library4Net.Service", "Vicold.Library4Net.Service\Vicold.Library4Net.Service.csproj", "{24746351-D793-4B1C-B6EE-5324E3FEEAF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vicold.UnitTest", "Vicold.UnitTest\Vicold.UnitTest.csproj", "{42B67CDC-39BE-48AE-92F4-0209867EA1C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4A16610E-54D5-4D53-ACB2-164A40ECD225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A16610E-54D5-4D53-ACB2-164A40ECD225}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A16610E-54D5-4D53-ACB2-164A40ECD225}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A16610E-54D5-4D53-ACB2-164A40ECD225}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A16610E-54D5-4D53-ACB2-164A40ECD225}.Debug|x64.ActiveCfg = Debug|x64
+		{4A16610E-54D5-4D53-ACB2-164A40ECD225}.Debug|x64.Build.0 = Debug|x64
+		{4A16610E-54D5-4D53-ACB2-164A40ECD225}.Release|x64.ActiveCfg = Release|x64
+		{4A16610E-54D5-4D53-ACB2-164A40ECD225}.Release|x64.Build.0 = Release|x64
+		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Debug|x64.ActiveCfg = Debug|x64
+		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Debug|x64.Build.0 = Debug|x64
+		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Release|x64.ActiveCfg = Release|x64
+		{F4070AEC-7878-400C-AAEE-518411D89FE8}.Release|x64.Build.0 = Release|x64
+		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Debug|x64.ActiveCfg = Debug|x64
+		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Debug|x64.Build.0 = Debug|x64
+		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Release|x64.ActiveCfg = Release|x64
+		{24746351-D793-4B1C-B6EE-5324E3FEEAF7}.Release|x64.Build.0 = Release|x64
+		{42B67CDC-39BE-48AE-92F4-0209867EA1C1}.Debug|x64.ActiveCfg = Debug|x64
+		{42B67CDC-39BE-48AE-92F4-0209867EA1C1}.Debug|x64.Build.0 = Debug|x64
+		{42B67CDC-39BE-48AE-92F4-0209867EA1C1}.Release|x64.ActiveCfg = Release|x64
+		{42B67CDC-39BE-48AE-92F4-0209867EA1C1}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

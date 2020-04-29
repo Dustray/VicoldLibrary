@@ -27,7 +27,7 @@ namespace Vicold.UnitTest
         [TestMethod]
         public void TestDateTime()
         {
-            //×Ö·û´®×ª»»
+            //×Ö·û´® To DateTime
             var now = DateTime.Now.Date.AddHours(8).AddMinutes(7).AddSeconds(6);
             var date1 = DateTimeUtility.ToDateTimeFormString(now.ToString("yyyyMMdd"));
             Assert.AreEqual(date1, now.Date);
@@ -37,6 +37,17 @@ namespace Vicold.UnitTest
 
             var date3 = DateTimeUtility.ToDateTimeFormString("2020-02-02 20:20:20", "yyyy-MM-dd HH:mm:ss");
             Assert.AreEqual(date3, new DateTime(2020, 2, 2, 20, 20, 20));
+
+            //DateTime To ×Ö·û´®
+            var dateStr1 = now.ToStandardStr();
+            Assert.AreEqual(dateStr1, now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+            var dateStr2 = now.ToDateStr();
+            Assert.AreEqual(dateStr2, now.ToString("yyyy-MM-dd"));
+
+            var dateStr3 = now.ToTimeStr("*");
+            Assert.AreEqual(dateStr3, now.ToString("HH*mm*ss"));
+
             //Ê±¼ä´Á×ª»»
             var unixStamp = 1580646020L;
             var jsStamp = 1580646020000L;

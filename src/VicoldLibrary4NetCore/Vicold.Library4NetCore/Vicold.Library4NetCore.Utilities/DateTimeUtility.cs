@@ -7,6 +7,9 @@ namespace Vicold.Library4NetCore.Utilities
     /// </summary>
     public static class DateTimeUtility
     {
+
+        #region 字符串 To DateTime
+
         /// <summary>
         /// 使用自定义格式转化为DateTime
         /// </summary>
@@ -99,6 +102,45 @@ namespace Vicold.Library4NetCore.Utilities
             }
         }
 
+        #endregion
+
+        #region DateTime To 字符串 扩展方法
+
+        /// <summary>
+        /// 转化为标准日期时间字符格式
+        /// <para>yyyy-MM-dd HH:mm:ss</para>
+        /// </summary>
+        /// <param name="dateTime">日期时间</param>
+        /// <returns>标准日期字符格式字符串</returns>
+        public static string ToStandardStr(this DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+        /// <summary>
+        /// 转化为日期字符格式
+        /// </summary>
+        /// <param name="dateTime">日期时间</param>
+        /// <param name="delimiter">分隔符,默认“-”</param>
+        /// <returns>日期字符格式字符串</returns>
+        public static string ToDateStr(this DateTime dateTime, string delimiter = "-")
+        {
+            return dateTime.ToString($"yyyy{delimiter}MM{delimiter}dd");
+        }
+        /// <summary>
+        /// 转化为时间字符格式
+        /// </summary>
+        /// <param name="dateTime">日期时间</param>
+        /// <param name="delimiter">分隔符,默认“:”</param>
+        /// <returns>时间字符格式字符串</returns>
+        public static string ToTimeStr(this DateTime dateTime, string delimiter = ":")
+        {
+            return dateTime.ToString($"HH{delimiter}mm{delimiter}ss");
+        }
+
+        #endregion
+
+        #region 时间戳转化
+
         /// <summary>
         /// 日期转Unix时间戳（到秒）
         /// </summary>
@@ -140,5 +182,51 @@ namespace Vicold.Library4NetCore.Utilities
             System.DateTime startTime = TimeZoneInfo.ConvertTimeFromUtc(new System.DateTime(1970, 1, 1), TimeZoneInfo.Local); // 当地时区
             return startTime.AddMilliseconds(jsTimeStamp);
         }
+
+        #endregion
+
+        #region 日期计算
+
+        /// <summary>
+        /// 获取日期是当月的第几周
+        /// </summary>
+        /// <param name="day">日期时间</param>
+        /// <param name="weekStartWithSunday">每周从周日起算，默认false</param>
+        /// <returns></returns>
+        public static int WeekOfMonth(this DateTime day, bool weekStartWithSunday = false)
+        {
+            DateTime FirstofMonth;
+            FirstofMonth = Convert.ToDateTime(day.Date.Year + "-" + day.Date.Month + "-" + 1);
+
+            int i = (int)FirstofMonth.Date.DayOfWeek;
+            if (i == 0)
+            {
+                i = 7;
+            }
+            if (!weekStartWithSunday)
+            {
+                return (day.Date.Day + i - 2) / 7 + 1;
+            }
+            else
+            {
+                return (day.Date.Day + i - 1) / 7;
+            }
+        }
+
+        /// <summary>
+        /// 获得两个日期的间隔
+        /// </summary>
+        /// <param name="dateTime1">日期一</param>
+        /// <param name="dateTime2">日期二</param>
+        /// <returns>日期间隔TimeSpan。</returns>
+        public static TimeSpan GetDateInterval(DateTime dateTime1, DateTime dateTime2)
+        {
+            TimeSpan ts1 = new TimeSpan(dateTime1.Ticks);
+            TimeSpan ts2 = new TimeSpan(dateTime2.Ticks);
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+            return ts;
+        }
+
+        #endregion
     }
 }

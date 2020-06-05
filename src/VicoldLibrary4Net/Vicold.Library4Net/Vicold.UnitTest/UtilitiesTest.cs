@@ -35,7 +35,7 @@ namespace Vicold.UnitTest
             var date2 = DateTimeUtility.ToDateTimeFormString(now.ToString("yyyyMMddHHmmss"));
             Assert.AreEqual(date2, now);
 
-            var date3 = DateTimeUtility.ToDateTimeFormString("2020-02-02 20:20:20","yyyy-MM-dd HH:mm:ss");
+            var date3 = DateTimeUtility.ToDateTimeFormString("2020-02-02 20:20:20", "yyyy-MM-dd HH:mm:ss");
             Assert.AreEqual(date3, new DateTime(2020, 2, 2, 20, 20, 20));
 
             //DateTime To 字符串
@@ -51,7 +51,7 @@ namespace Vicold.UnitTest
             //时间戳转换
             var unixStamp = 1580646020L;
             var jsStamp = 1580646020000L;
-            var date = new DateTime(2020,2,2,20,20,20);
+            var date = new DateTime(2020, 2, 2, 20, 20, 20);
             var reDate1 = DateTimeUtility.FromUnixTimestamp(unixStamp);
             Assert.AreEqual(reDate1, date);
             var reDate2 = DateTimeUtility.FromJSTimestamp(jsStamp);
@@ -66,5 +66,6 @@ namespace Vicold.UnitTest
             var week = date.WeekOfMonth();
             Assert.AreEqual(week, 1);
         }
+
     }
 }

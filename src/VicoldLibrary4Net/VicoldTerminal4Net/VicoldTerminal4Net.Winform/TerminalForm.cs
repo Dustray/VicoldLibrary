@@ -19,6 +19,7 @@ namespace VicoldTerminal4Net.Winform
         public TerminalForm()
         {
             InitializeComponent();
+            TopMost = true;
             CanResize = true;
             _lastSelectionStart = _headStr.Length;
             inputText.Text = _headStr;
@@ -71,6 +72,7 @@ namespace VicoldTerminal4Net.Winform
                     break;
             }
 
+            if(this.IsDisposed)return;
             _lastSelectionStart = inputText.SelectionStart;
         }
 
@@ -151,6 +153,7 @@ namespace VicoldTerminal4Net.Winform
 
         private void RecordLog(string log)
         {
+            if(this.IsDisposed)return;
             logText.AppendText($"{log}\r\n");
             logText.ScrollToCaret();
         }
@@ -159,10 +162,16 @@ namespace VicoldTerminal4Net.Winform
 
         private void PresetCommand()
         {
-            CommandTerminal.Current.AddOrder("cl", (a) =>
+            CommandTerminal.Current.AddOrder("clr", (a) =>
             {
                 logText.Clear();
             });
+
+            CommandTerminal.Current.AddOrder("exit", (a) =>
+            {
+                Close();
+            });
+
         }
 
     }

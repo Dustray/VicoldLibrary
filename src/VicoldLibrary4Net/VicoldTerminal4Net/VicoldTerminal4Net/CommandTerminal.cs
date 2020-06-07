@@ -30,7 +30,7 @@ namespace VicoldTerminal4Net
         /// 模块引擎
         /// <para>当前的</para>
         /// </summary>
-        internal static CommandTerminal Current => ModEngineHolder.INSTANCE;
+        public static CommandTerminal Current => ModEngineHolder.INSTANCE;
 
         #endregion
 

@@ -75,5 +75,11 @@
   <ItemGroup>
     <None Include="Resources\close.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VicoldTerminal4Net\VicoldTerminal4Net.csproj">
+      <Project>{83d4f795-53c0-40bb-8ad4-4467d260abbc}</Project>
+      <Name>VicoldTerminal4Net</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

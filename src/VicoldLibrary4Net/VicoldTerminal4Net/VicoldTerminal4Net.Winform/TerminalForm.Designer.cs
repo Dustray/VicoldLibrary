@@ -69,6 +69,7 @@
             this.logText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.logText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.logText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logText.ForeColor = System.Drawing.SystemColors.Info;
             this.logText.Location = new System.Drawing.Point(0, 0);
             this.logText.Multiline = true;
             this.logText.Name = "logText";

@@ -41,9 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandException.cs" />
-    <Compile Include="CommandQueue.cs" />
-    <Compile Include="CommandTerminal.cs" />
+    <Compile Include="CmdException.cs" />
+    <Compile Include="CmdInterpreter.cs" />
+    <Compile Include="CmdParams.cs" />
+    <Compile Include="CmdQueue.cs" />
+    <Compile Include="CmdTerminal.cs" />
+    <Compile Include="ICommander.cs" />
+    <Compile Include="ICmdInterpreter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

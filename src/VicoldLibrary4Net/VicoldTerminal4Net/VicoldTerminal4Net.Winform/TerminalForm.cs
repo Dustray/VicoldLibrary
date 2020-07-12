@@ -72,7 +72,7 @@ namespace VicoldTerminal4Net.Winform
                     break;
             }
 
-            if(this.IsDisposed)return;
+            if (this.IsDisposed) return;
             _lastSelectionStart = inputText.SelectionStart;
         }
 
@@ -128,32 +128,34 @@ namespace VicoldTerminal4Net.Winform
         /// <summary>
         /// 发送命令
         /// </summary>
-        private void Send()
+        private async void Send()
         {
             var orderStr = inputText.Text;
             inputText.Text = _headStr;
             inputText.SelectionStart = _headStr.Length;
             orderStr = new Regex("[\\s]+").Replace(orderStr, " ");
-            var orderArray = orderStr.Split(' ');
-            if (orderArray.Length >= 2 && orderArray[1] != "")
+            if (orderStr.Length <= _headStr.Length)
             {
-                var paras = new string[orderArray.Length - 2];
-                if (orderArray.Length != 2)
-                    Array.Copy(orderArray, 2, paras, 0, orderArray.Length - 2);
-                if (CommandTerminal.Current.TryExecuteOrder(orderArray[1], paras))
+                return;
+            }
+            var orderArray = orderStr.Substring(_headStr.Length, orderStr.Length - _headStr.Length);
+            if (!string.IsNullOrWhiteSpace(orderArray))
+            {
+                var result = await CmdTerminal.Current.TryExecuteOrder(orderArray);
+                if (result)
                 {
-                    RecordLog($"已执行命令：{orderArray[1]}");
+                    RecordLog($"已执行命令：{orderArray}");
                 }
                 else
                 {
-                    RecordLog($"找不到命令：{orderArray[1]}");
+                    RecordLog($"找不到命令：{orderArray}");
                 }
             }
         }
 
         private void RecordLog(string log)
         {
-            if(this.IsDisposed)return;
+            if (this.IsDisposed) return;
             logText.AppendText($"{log}\r\n");
             logText.ScrollToCaret();
         }
@@ -162,16 +164,26 @@ namespace VicoldTerminal4Net.Winform
 
         private void PresetCommand()
         {
-            CommandTerminal.Current.AddOrder("clr", (a) =>
+            CmdTerminal.Current.AddOrder("clr", (a) =>
             {
-                logText.Clear();
+                HostInvoke(() =>
+                {
+                    logText.Clear();
+                });
             });
 
-            CommandTerminal.Current.AddOrder("exit", (a) =>
+            CmdTerminal.Current.AddOrder("exit", (a) =>
             {
-                Close();
+                HostInvoke(() =>
+                {
+                    Close();
+                });
             });
+        }
 
+        private void HostInvoke(Action action)
+        {
+            this.Invoke(action);
         }
 
     }

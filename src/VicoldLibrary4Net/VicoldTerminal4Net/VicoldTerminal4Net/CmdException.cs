@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace VicoldTerminal4Net
 {
-    public class CommandException : Exception
+    public class CmdException : Exception
     {
-        public CommandException() : base()
+        public CmdException() : base()
         {
 
         }
 
-        public CommandException(string message) : base(message)
+        public CmdException(string message) : base(message)
         {
 
         }

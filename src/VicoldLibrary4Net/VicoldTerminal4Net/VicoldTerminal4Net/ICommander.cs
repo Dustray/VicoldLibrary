@@ -30,5 +30,11 @@ namespace VicoldTerminal4Net
         /// <param name="customerContent">自定义实体</param>
         /// <returns>执行结果：是否成功</returns>
         Task<bool> TryExecuteOrder(string orderLine, object customerContent = null);
+        /// <summary>
+        /// 绑定内置输出器
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        Task<bool> BindingInternalOutput(Action<string> action);
     }
 }

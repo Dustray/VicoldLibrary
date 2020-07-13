@@ -90,5 +90,10 @@ namespace VicoldTerminal4Net
         {
             _commandQueue.Dispose();
         }
+
+        public Task<bool> BindingInternalOutput(Action<string> action)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

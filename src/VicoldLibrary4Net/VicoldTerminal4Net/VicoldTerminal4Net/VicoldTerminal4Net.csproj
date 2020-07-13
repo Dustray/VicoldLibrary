@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdDetailEtt.cs" />
     <Compile Include="CmdException.cs" />
     <Compile Include="CmdInterpreter.cs" />
     <Compile Include="CmdParams.cs" />
+    <Compile Include="CmdPool.cs" />
     <Compile Include="CmdQueue.cs" />
     <Compile Include="CmdTerminal.cs" />
     <Compile Include="ICommander.cs" />

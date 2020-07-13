@@ -9,7 +9,7 @@ namespace VicoldTerminal4Net
     /// <summary>
     /// 命令工具接口
     /// </summary>
-    public interface ICommander
+    public interface ICommander:IDisposable
     {
         /// <summary>
         /// 添加命令
@@ -17,6 +17,12 @@ namespace VicoldTerminal4Net
         /// <param name="order">命令</param>
         /// <param name="action">执行方法</param>
         void AddOrder(string order, Action<CmdParams> action);
+        /// <summary>
+        /// 添加命令
+        /// </summary>
+        /// <param name="order">命令</param>
+        /// <param name="action">执行方法</param>
+        void AddOrder(string order,string description, Action<CmdParams> action);
         /// <summary>
         /// 尝试执行指定命令
         /// </summary>

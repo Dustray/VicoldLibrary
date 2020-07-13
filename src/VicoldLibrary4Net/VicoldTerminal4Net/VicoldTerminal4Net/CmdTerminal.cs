@@ -44,7 +44,30 @@ namespace VicoldTerminal4Net
         /// <param name="action"></param>
         public void AddOrder(string order, Action<CmdParams> action)
         {
-            _commandQueue.AddOrder(order, action);
+            var detail = new CmdDetailEtt()
+            {
+                Order = order,
+                Description = "",
+                Callback = action
+            };
+            _commandQueue.AddOrder(order, detail);
+        }
+
+        /// <summary>
+        /// 添加命令
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="description"></param>
+        /// <param name="action"></param>
+        public void AddOrder(string order, string description, Action<CmdParams> action)
+        {
+            var detail = new CmdDetailEtt()
+            {
+                Order = order,
+                Description = description,
+                Callback = action
+            };
+            _commandQueue.AddOrder(order, detail);
         }
         /// <summary>
         /// 尝试执行指定命令
@@ -60,5 +83,12 @@ namespace VicoldTerminal4Net
             return result;
         }
 
+        /// <summary>
+        /// 释放
+        /// </summary>
+        public void Dispose()
+        {
+            _commandQueue.Dispose();
+        }
     }
 }

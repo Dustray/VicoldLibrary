@@ -164,15 +164,14 @@ namespace VicoldTerminal4Net.Winform
 
         private void PresetCommand()
         {
-            CmdTerminal.Current.AddOrder("clr", (a) =>
+            CmdTerminal.Current.AddOrder("clr", (cmdParams) =>
             {
                 HostInvoke(() =>
                 {
                     logText.Clear();
                 });
             });
-
-            CmdTerminal.Current.AddOrder("exit", (a) =>
+            CmdTerminal.Current.AddOrder("exit", (cmdParams) =>
             {
                 HostInvoke(() =>
                 {

@@ -10,32 +10,34 @@ namespace VicoldTerminal4Net
     /// <summary>
     /// 命令队列
     /// </summary>
-    internal sealed class CmdQueue
+    internal sealed class CmdQueue:IDisposable
     {
         /// <summary>
         /// 命令队列
         /// </summary>
-        private ConcurrentDictionary<string, Action<CmdParams>> _orderQueue;
+        private ConcurrentDictionary<string, CmdDetailEtt> _orderQueue;
         /// <summary>
         /// 构造方法
         /// </summary>
         internal CmdQueue()
         {
-            _orderQueue = new ConcurrentDictionary<string, Action<CmdParams>>();
+            _orderQueue = new ConcurrentDictionary<string, CmdDetailEtt>();
         }
         /// <summary>
         /// 添加命令
         /// </summary>
         /// <param name="order">命令</param>
         /// <param name="action">执行方法</param>
-        public void AddOrder(string order, Action<CmdParams> action)
+        public void AddOrder(string order, CmdDetailEtt detial)
         {
             if (_orderQueue.ContainsKey(order))
             {
                 throw new CmdException($"已存在名称为{order}的命令。");
             }
-            _orderQueue[order] = action;
+            _orderQueue[order] = detial;
         }
+
+
         /// <summary> 
         /// 尝试执行命令
         /// </summary>
@@ -57,10 +59,19 @@ namespace VicoldTerminal4Net
                 {
                     return false;
                 }
-                await Task.Run(() => action.Invoke(cmdParam));
+                await Task.Run(() => action.Callback.Invoke(cmdParam));
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// 释放
+        /// </summary>
+        public void Dispose()
+        {
+            _orderQueue.Clear();
+            _orderQueue = null;
         }
     }
 }

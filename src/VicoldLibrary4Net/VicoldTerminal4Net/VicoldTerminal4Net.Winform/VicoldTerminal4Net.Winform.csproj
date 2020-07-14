@@ -49,7 +49,6 @@
     <Compile Include="AdjustableNoneForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OrderPool.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

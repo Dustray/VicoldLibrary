@@ -9,19 +9,17 @@ namespace VicoldTerminal4Net
     internal class CmdPool
     {
         public Dictionary<string, Action<CmdParams>> _orderCollection;
-        public CmdPool()
+        public CmdPool(Action<string> outputAction)
         {
             _orderCollection = new Dictionary<string, Action<CmdParams>>();
-            InitPool();
+            InitPool(outputAction);
         }
 
-        private void InitPool()
+        private void InitPool(Action<string> outputAction)
         {
             _orderCollection["help"] = (cmdParams) =>
              {
-
-
-
+                 outputAction?.Invoke("");
              };
         }
 

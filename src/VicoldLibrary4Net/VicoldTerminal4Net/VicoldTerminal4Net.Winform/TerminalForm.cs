@@ -123,6 +123,10 @@ namespace VicoldTerminal4Net.Winform
             }
         }
 
+        private void logText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
         #endregion
 
         #region 成员方法
@@ -143,15 +147,17 @@ namespace VicoldTerminal4Net.Winform
             var orderArray = orderStr.Substring(_headStr.Length, orderStr.Length - _headStr.Length);
             if (!string.IsNullOrWhiteSpace(orderArray))
             {
+                RecordLog(orderStr);
                 var result = await CmdTerminal.Current.TryExecuteOrder(orderArray);
                 if (result)
                 {
-                    RecordLog($"Command executed: [{orderArray}]");
+                    //RecordLog($"[SYS]Command executed: [{orderArray}]");
                 }
                 else
                 {
-                    RecordLog($"Error: Command [{orderArray}] not found");
+                    RecordLog($"[SYS]Error: Command [{orderArray}] not found");
                 }
+                RecordLog($"\r\n");
             }
         }
 

@@ -76,6 +76,7 @@
             this.logText.Size = new System.Drawing.Size(596, 263);
             this.logText.TabIndex = 1;
             this.logText.TabStop = false;
+            this.logText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.logText_KeyPress);
             // 
             // titleBar
             // 

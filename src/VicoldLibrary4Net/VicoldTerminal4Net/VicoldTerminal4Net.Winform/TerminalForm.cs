@@ -172,20 +172,20 @@ namespace VicoldTerminal4Net.Winform
 
         private void PresetCommand()
         {
-            CmdTerminal.Current.AddOrder("clr", (cmdParams) =>
-            {
-                HostInvoke(() =>
-                {
-                    logText.Clear();
-                });
-            });
-            CmdTerminal.Current.AddOrder("exit", (cmdParams) =>
-            {
-                HostInvoke(() =>
-                {
-                    Close();
-                });
-            });
+            CmdTerminal.Current.AddOrder("clr", "清空日志区。", (cmdParams) =>
+             {
+                 HostInvoke(() =>
+                 {
+                     logText.Clear();
+                 });
+             });
+            CmdTerminal.Current.AddOrder("exit", "退出命令行工具。", (cmdParams) =>
+             {
+                 HostInvoke(() =>
+                 {
+                     Close();
+                 });
+             });
         }
         private void TerminalBackCommand(string back)
         {

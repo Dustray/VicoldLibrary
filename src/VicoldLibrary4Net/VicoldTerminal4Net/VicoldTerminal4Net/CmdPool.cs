@@ -23,14 +23,44 @@ namespace VicoldTerminal4Net
                 Description = "帮助，当前命令列表及命令描述。",
                 Callback = (cmdParams) =>
                 {
-                    var output = new System.Text.StringBuilder("");
                     var s = CmdTerminal.CurrentX._commandQueue._orderQueue;
-                    foreach (var order in s)
+                    var output = new System.Text.StringBuilder("");
+                    if (cmdParams.PairParams == null || cmdParams.PairParams.Count == 0)
                     {
-                        output.Append(order.Key);
-                        output.Append("\t");
-                        output.Append(order.Value.Description);
-                        output.Append("\r\n");
+                        var index = 0;
+                        foreach (var order in s)
+                        {
+                            if (index != 0)
+                            {
+                                output.Append("\r\n");
+                            }
+                            output.Append(order.Key);
+                            output.Append("\t");
+                            output.Append(order.Value.Description);
+                            index++;
+                        }
+                    }
+                    else
+                    {
+                        var o = cmdParams.PairParams.First().Key;
+                        var index = 0;
+                        foreach (var order in s)
+                        {
+                            if (!order.Key.StartsWith(o))
+                                continue;
+                            if (index != 0)
+                            {
+                                output.Append("\r\n");
+                            }
+                            output.Append(order.Key);
+                            output.Append("\t");
+                            output.Append(order.Value.Description);
+                            index++;
+                        }
+                        if (index == 0)
+                        {
+                            output.Append($"No command [{o}] or starting with [{o}] was found.");
+                        }
                     }
                     outputAction?.Invoke(output.ToString());
                 }

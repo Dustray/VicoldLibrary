@@ -26,9 +26,9 @@ namespace VicoldTerminal4Net
             cmdParam.OrderLine = orderStr;
             if (orderArray.Length == 0 || (orderArray.Length == 1 && orderArray[0] == ""))
                 return null;
+            cmdParam.Order = orderArray[0];
             if (orderArray.Length == 1)
             {
-                cmdParam.Order = orderArray[0];
                 return cmdParam;
             }
             //分离指令参数

@@ -51,7 +51,6 @@
             this.inputText.ForeColor = System.Drawing.SystemColors.Info;
             this.inputText.Location = new System.Drawing.Point(0, 0);
             this.inputText.MinimumSize = new System.Drawing.Size(0, 30);
-            this.inputText.Multiline = false;
             this.inputText.Name = "inputText";
             this.inputText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.inputText.ShowSelectionMargin = true;
@@ -69,6 +68,7 @@
             this.logText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.logText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.logText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logText.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logText.ForeColor = System.Drawing.SystemColors.Info;
             this.logText.Location = new System.Drawing.Point(0, 0);
             this.logText.Multiline = true;

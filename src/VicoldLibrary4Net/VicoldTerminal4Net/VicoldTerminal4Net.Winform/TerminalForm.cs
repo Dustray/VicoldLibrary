@@ -24,6 +24,8 @@ namespace VicoldTerminal4Net.Winform
             _lastSelectionStart = _headStr.Length;
             inputText.Text = _headStr;
             inputText.SelectionStart = _lastSelectionStart;
+
+            CmdTerminal.Current.BindingInternalOutput(TerminalBackCommand);
             PresetCommand();
         }
 
@@ -144,11 +146,11 @@ namespace VicoldTerminal4Net.Winform
                 var result = await CmdTerminal.Current.TryExecuteOrder(orderArray);
                 if (result)
                 {
-                    RecordLog($"已执行命令：{orderArray}");
+                    RecordLog($"Command executed: [{orderArray}]");
                 }
                 else
                 {
-                    RecordLog($"找不到命令：{orderArray}");
+                    RecordLog($"Error: Command [{orderArray}] not found");
                 }
             }
         }
@@ -179,7 +181,13 @@ namespace VicoldTerminal4Net.Winform
                 });
             });
         }
-
+        private void TerminalBackCommand(string back)
+        {
+            HostInvoke(() =>
+            {
+                RecordLog(back);
+            });
+        }
         private void HostInvoke(Action action)
         {
             this.Invoke(action);

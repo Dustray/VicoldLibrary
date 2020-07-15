@@ -15,7 +15,7 @@ namespace VicoldTerminal4Net
         /// <summary>
         /// 命令队列
         /// </summary>
-        private ConcurrentDictionary<string, CmdDetailEtt> _orderQueue;
+        internal ConcurrentDictionary<string, CmdDetailEtt> _orderQueue { get; private set; }
         /// <summary>
         /// 构造方法
         /// </summary>

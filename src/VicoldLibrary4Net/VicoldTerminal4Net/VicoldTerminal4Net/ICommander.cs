@@ -35,6 +35,6 @@ namespace VicoldTerminal4Net
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
-        Task<bool> BindingInternalOutput(Action<string> action);
+        Task BindingInternalOutput(Action<string> action);
     }
 }

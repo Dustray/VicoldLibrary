@@ -8,19 +8,33 @@ namespace VicoldTerminal4Net
 {
     internal class CmdPool
     {
-        public Dictionary<string, Action<CmdParams>> _orderCollection;
+        public List<CmdDetailEtt> OrderCollection { get; private set; }
         public CmdPool(Action<string> outputAction)
         {
-            _orderCollection = new Dictionary<string, Action<CmdParams>>();
+            OrderCollection = new List<CmdDetailEtt>();
             InitPool(outputAction);
         }
 
         private void InitPool(Action<string> outputAction)
         {
-            _orderCollection["help"] = (cmdParams) =>
-             {
-                 outputAction?.Invoke("");
-             };
+            OrderCollection.Add(new CmdDetailEtt()
+            {
+                Order = "help",
+                Description = "帮助，当前命令列表及命令描述。",
+                Callback = (cmdParams) =>
+                {
+                    var output = new System.Text.StringBuilder("");
+                    var s = CmdTerminal.CurrentX._commandQueue._orderQueue;
+                    foreach (var order in s)
+                    {
+                        output.Append(order.Key);
+                        output.Append("\t");
+                        output.Append(order.Value.Description);
+                        output.Append("\r\n");
+                    }
+                    outputAction?.Invoke(output.ToString());
+                }
+            });
         }
 
     }

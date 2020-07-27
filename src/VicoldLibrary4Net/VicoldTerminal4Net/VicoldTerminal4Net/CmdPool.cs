@@ -42,11 +42,15 @@ namespace VicoldTerminal4Net
                     }
                     else
                     {
-                        var o = cmdParams.PairParams.First().Key;
+                        var o = cmdParams.PairParams.First();
+                        if (o.Key != "-o")
+                        {
+                            return;
+                        }
                         var index = 0;
                         foreach (var order in s)
                         {
-                            if (!order.Key.StartsWith(o))
+                            if (!order.Key.Contains(o.Value))
                                 continue;
                             if (index != 0)
                             {
@@ -55,6 +59,14 @@ namespace VicoldTerminal4Net
                             output.Append(order.Key);
                             output.Append("\t");
                             output.Append(order.Value.Description);
+                            if (order.Value.ParamNames.Count > 0)
+                            {
+                                foreach (var param in order.Value.ParamNames)
+                                {
+                                    output.Append("\r\n");
+                                    output.Append($"    {param.Key}\t{param.Value}");
+                                }
+                            }
                             index++;
                         }
                         if (index == 0)
@@ -64,7 +76,7 @@ namespace VicoldTerminal4Net
                     }
                     outputAction?.Invoke(output.ToString());
                 }
-            });
+            }.AddParam("o", "Displays all commands containing input string and their arguments."));
         }
 
     }

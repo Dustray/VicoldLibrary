@@ -186,6 +186,15 @@ namespace VicoldTerminal4Net.Winform
                      Close();
                  });
              });
+            CmdTerminal.Current.AddOrder("test", "清空日志区。", (cmdParams) =>
+            {
+                HostInvoke(() =>
+                {
+                    //logText.Clear();
+                });
+            }).AddParam("a", "AAA")
+             .AddParam("b", "BBB")
+             .AddParam("c", "CCC");
         }
         private void TerminalBackCommand(string back)
         {

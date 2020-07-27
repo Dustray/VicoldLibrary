@@ -21,6 +21,7 @@ namespace VicoldTerminal4Net
         {
             //格式化命令行
             orderStr = new Regex("[\\s]+").Replace(orderStr, " ");
+            orderStr = orderStr.Trim();
             var orderArray = orderStr.Split(' ');
             var cmdParam = new CmdParams();
             cmdParam.OrderLine = orderStr;
@@ -55,7 +56,7 @@ namespace VicoldTerminal4Net
                 }
                 else
                 {
-                    pairParams.Add(new KeyValuePair<string, string>(para, null));
+                    pairParams.Add(new KeyValuePair<string, string>(null, para));
                 }
 
             }

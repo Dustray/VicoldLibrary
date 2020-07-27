@@ -10,7 +10,7 @@ namespace VicoldTerminal4Net
     /// <summary>
     /// 命令队列
     /// </summary>
-    internal sealed class CmdQueue:IDisposable
+    internal sealed class CmdQueue : IDisposable
     {
         /// <summary>
         /// 命令队列
@@ -28,13 +28,13 @@ namespace VicoldTerminal4Net
         /// </summary>
         /// <param name="order">命令</param>
         /// <param name="action">执行方法</param>
-        public void AddOrder(string order, CmdDetailEtt detial)
+        public void AddOrder(CmdDetailEtt detial)
         {
-            if (_orderQueue.ContainsKey(order))
+            if (_orderQueue.ContainsKey(detial.Order))
             {
-                throw new CmdException($"已存在名称为{order}的命令。");
+                throw new CmdException($"已存在名称为{detial.Order}的命令。");
             }
-            _orderQueue[order] = detial;
+            _orderQueue[detial.Order] = detial;
         }
 
 
@@ -53,13 +53,65 @@ namespace VicoldTerminal4Net
             {
                 throw new CmdException($"找不到命令头：{cmdParam.OrderLine}");
             }
-            if (_orderQueue.TryGetValue(cmdParam.Order, out var action))
+            if (_orderQueue.TryGetValue(cmdParam.Order, out var cmdDetial))
             {
-                if (null == action)
+                if (cmdDetial == null || cmdDetial.Callback == null)
                 {
                     return false;
                 }
-                await Task.Run(() => action.Callback.Invoke(cmdParam));
+                var newBackParams = new List<KeyValuePair<string, string>>();
+                //newBackParam = 
+                //foreach (var p in cmdDetial.ParamNames)
+                //{
+                //    newBackParams.Add(new KeyValuePair<string, string>(p.Key, null));
+                //}
+                var fakeParam = cmdDetial.ParamNames.ToArray();
+                var index = 0;
+                foreach (var pPair in cmdParam.PairParams)
+                {
+                    if (pPair.Key == null)
+                    {
+                        if (index >= cmdDetial.ParamNames.Count)
+                        {
+                            return false;
+                        }
+                        var key = fakeParam[index].Key;
+
+                        var newBPCount = newBackParams.Count(v => v.Key == key);
+                        if (newBPCount > 0)
+                        {
+                            return false;
+                        }
+                        newBackParams.Add(new KeyValuePair<string, string>(key, pPair.Value));
+                    }
+                    else if (pPair.Value == null)
+                    {
+                        var pCount = cmdDetial.ParamNames.Count(v => v.Key == pPair.Key);
+                        if (pCount == 0)
+                        {
+                            return false;
+                        }
+                        newBackParams.Add(new KeyValuePair<string, string>(pPair.Key, null));
+                        //参数没有对应值
+                    }
+                    else
+                    {
+                        var newBPCount = newBackParams.Count(v => v.Key == pPair.Key);
+                        if (newBPCount > 0)
+                        {
+                            return false;
+                        }
+                        var pCount = cmdDetial.ParamNames.Count(v => v.Key == pPair.Key);
+                        if (pCount == 0)
+                        {
+                            return false;
+                        }
+                        newBackParams.Add(new KeyValuePair<string, string>(pPair.Key, pPair.Value));
+                    }
+                    index++;
+                }
+                cmdParam.PairParams = newBackParams;
+                await Task.Run(() => cmdDetial.Callback.Invoke(cmdParam));
                 return true;
             }
             return false;

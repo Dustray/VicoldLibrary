@@ -44,6 +44,7 @@
     <Compile Include="CmdDetailEtt.cs" />
     <Compile Include="CmdException.cs" />
     <Compile Include="CmdInterpreter.cs" />
+    <Compile Include="CmdOutPutType.cs" />
     <Compile Include="CmdParams.cs" />
     <Compile Include="CmdPool.cs" />
     <Compile Include="CmdQueue.cs" />

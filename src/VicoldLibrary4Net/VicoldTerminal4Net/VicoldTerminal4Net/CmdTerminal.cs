@@ -32,12 +32,13 @@ namespace VicoldTerminal4Net
         /// <para>当前的</para>
         /// </summary>
         public static ICommander Current => ModEngineHolder.INSTANCE;
-        internal static CmdTerminal CurrentX => ModEngineHolder.INSTANCE;
+        internal static CmdTerminal CurrentInternal => ModEngineHolder.INSTANCE;
 
         #endregion
 
         internal CmdQueue _commandQueue;
         private ICmdInterpreter _interpreter;
+        internal Action<string, CmdOutPutType> InternalOutputCallback;
         /// <summary>
         /// 添加命令
         /// </summary>
@@ -104,9 +105,10 @@ namespace VicoldTerminal4Net
             _commandQueue.Dispose();
         }
 
-        public Task BindingInternalOutput(Action<string> action)
+        public Task BindingInternalOutput(Action<string, CmdOutPutType> action)
         {
-            var pool = new CmdPool(action).OrderCollection;
+            InternalOutputCallback = action;
+            var pool = new CmdPool().OrderCollection;
             foreach (var order in pool)
             {
                 AddOrder(order);

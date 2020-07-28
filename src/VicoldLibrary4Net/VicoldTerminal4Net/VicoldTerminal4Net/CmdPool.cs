@@ -9,13 +9,13 @@ namespace VicoldTerminal4Net
     internal class CmdPool
     {
         public List<CmdDetailEtt> OrderCollection { get; private set; }
-        public CmdPool(Action<string> outputAction)
+        public CmdPool()
         {
             OrderCollection = new List<CmdDetailEtt>();
-            InitPool(outputAction);
+            InitPool();
         }
 
-        private void InitPool(Action<string> outputAction)
+        private void InitPool()
         {
             OrderCollection.Add(new CmdDetailEtt()
             {
@@ -23,7 +23,8 @@ namespace VicoldTerminal4Net
                 Description = "帮助，当前命令列表及命令描述。",
                 Callback = (cmdParams) =>
                 {
-                    var s = CmdTerminal.CurrentX._commandQueue._orderQueue;
+                    var s = CmdTerminal.CurrentInternal._commandQueue._orderQueue;
+                    CmdOutPutType cmdOutPutType = CmdOutPutType.Info;
                     var output = new System.Text.StringBuilder("");
                     if (cmdParams.PairParams == null || cmdParams.PairParams.Count == 0)
                     {
@@ -69,12 +70,13 @@ namespace VicoldTerminal4Net
                             }
                             index++;
                         }
-                        if (index == 0)
-                        {
-                            output.Append($"No command [{o}] or starting with [{o}] was found.");
-                        }
+                        //if (index == 0)
+                        //{
+                            //output.Append($"No command [{o.Key}] or starting with [{o.Key}] was found.");
+                            //cmdOutPutType = CmdOutPutType.Error;
+                        //}
                     }
-                    outputAction?.Invoke(output.ToString());
+                    CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke(output.ToString(), cmdOutPutType);
                 }
             }.AddParam("o", "Displays all commands containing input string and their arguments."));
         }

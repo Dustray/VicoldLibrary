@@ -57,6 +57,7 @@ namespace VicoldTerminal4Net
             {
                 if (cmdDetial == null || cmdDetial.Callback == null)
                 {
+                    CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke("命令获取失败，使用help查看所有命令。", CmdOutPutType.Error);
                     return false;
                 }
                 var newBackParams = new List<KeyValuePair<string, string>>();
@@ -73,6 +74,7 @@ namespace VicoldTerminal4Net
                     {
                         if (index >= cmdDetial.ParamNames.Count)
                         {
+                            CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke("参数过多，使用help -o [command]查看命令参数说明。", CmdOutPutType.Error);
                             return false;
                         }
                         var key = fakeParam[index].Key;
@@ -80,6 +82,7 @@ namespace VicoldTerminal4Net
                         var newBPCount = newBackParams.Count(v => v.Key == key);
                         if (newBPCount > 0)
                         {
+                            CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke("参数重复赋值，使用help -o [command]查看命令参数说明。", CmdOutPutType.Error);
                             return false;
                         }
                         newBackParams.Add(new KeyValuePair<string, string>(key, pPair.Value));
@@ -89,21 +92,23 @@ namespace VicoldTerminal4Net
                         var pCount = cmdDetial.ParamNames.Count(v => v.Key == pPair.Key);
                         if (pCount == 0)
                         {
+                            CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke($"命令【{cmdDetial.Order}】没有参数【{pPair.Key}】，使用help -o [command]查看命令参数说明。", CmdOutPutType.Error);
                             return false;
                         }
                         newBackParams.Add(new KeyValuePair<string, string>(pPair.Key, null));
-                        //参数没有对应值
                     }
                     else
                     {
                         var newBPCount = newBackParams.Count(v => v.Key == pPair.Key);
                         if (newBPCount > 0)
                         {
+                            CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke("参数重复赋值，使用help -o [command]查看命令参数说明。", CmdOutPutType.Error);
                             return false;
                         }
                         var pCount = cmdDetial.ParamNames.Count(v => v.Key == pPair.Key);
                         if (pCount == 0)
                         {
+                            CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke($"命令【{cmdDetial.Order}】没有参数【{pPair.Key}】，使用help -o [command]查看命令参数说明。", CmdOutPutType.Error);
                             return false;
                         }
                         newBackParams.Add(new KeyValuePair<string, string>(pPair.Key, pPair.Value));
@@ -114,6 +119,7 @@ namespace VicoldTerminal4Net
                 await Task.Run(() => cmdDetial.Callback.Invoke(cmdParam));
                 return true;
             }
+            CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke("未找到命令，使用help查看所有命令。", CmdOutPutType.Error);
             return false;
         }
 

@@ -186,6 +186,7 @@ namespace VicoldTerminal4Net.Winform
                      Close();
                  });
              });
+#if DEBUIG
             CmdTerminal.Current.AddOrder("test", "清空日志区。", (cmdParams) =>
             {
                 HostInvoke(() =>
@@ -195,8 +196,9 @@ namespace VicoldTerminal4Net.Winform
             }).AddParam("a", "AAA")
              .AddParam("b", "BBB")
              .AddParam("c", "CCC");
+#endif
         }
-        private void TerminalBackCommand(string back)
+        private void TerminalBackCommand(string back, CmdOutPutType type)
         {
             HostInvoke(() =>
             {

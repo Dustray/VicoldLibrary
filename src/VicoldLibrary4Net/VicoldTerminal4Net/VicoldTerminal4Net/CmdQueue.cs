@@ -66,17 +66,13 @@ namespace VicoldTerminal4Net
                     return false;
                 }
                 var newBackParams = new List<KeyValuePair<string, string>>();
-                //newBackParam = 
-                //foreach (var p in cmdDetial.ParamNames)
-                //{
-                //    newBackParams.Add(new KeyValuePair<string, string>(p.Key, null));
-                //}
                 var fakeParam = cmdDetial.ParamNames.ToArray();
                 var index = 0;
                 foreach (var pPair in cmdParam.PairParams)
                 {
                     if (pPair.Key == null)
                     {
+                        //只有值
                         if (index >= cmdDetial.ParamNames.Count)
                         {
                             CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke("参数过多，使用help -o [command]查看命令参数说明。", CmdOutPutType.Error);
@@ -94,6 +90,7 @@ namespace VicoldTerminal4Net
                     }
                     else if (pPair.Value == null)
                     {
+                        //只有键
                         var pCount = cmdDetial.ParamNames.Count(v => v.Key == pPair.Key);
                         if (pCount == 0)
                         {
@@ -104,6 +101,7 @@ namespace VicoldTerminal4Net
                     }
                     else
                     {
+                        //都有
                         var newBPCount = newBackParams.Count(v => v.Key == pPair.Key);
                         if (newBPCount > 0)
                         {
@@ -128,6 +126,11 @@ namespace VicoldTerminal4Net
             return false;
         }
 
+        /// <summary>
+        /// 检查可执行类型是否符合
+        /// </summary>
+        /// <param name="executableType"></param>
+        /// <returns></returns>
         private bool CheckMode(ExecutableType executableType)
         {
             var isDebug = false;

@@ -194,9 +194,10 @@ namespace VicoldTerminal4Net.Winform
                 {
                     RecordLog("You execute TEST.");
                 });
-            }).AddParam("a", "AAA")
+            }).SetExecutableType(ExecutableType.Admin & ExecutableType.Debug)
+             .AddParam("a", "AAA")
              .AddParam("b", "BBB")
-             .AddParam("c", "CCC").SetExecutableType(ExecutableType.Admin& ExecutableType.Debug);
+             .AddParam("c", "CCC");
 #endif
         }
         private void TerminalBackCommand(string back, CmdOutPutType type)

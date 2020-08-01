@@ -60,6 +60,11 @@ namespace VicoldTerminal4Net
                     CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke("命令获取失败，使用help查看所有命令。", CmdOutPutType.Error);
                     return false;
                 }
+                if (!CheckMode(cmdDetial.CmdType))
+                {
+                    CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke($"命令[cmdParam.Order]执行失败，不在可执行范围内。", CmdOutPutType.Error);
+                    return false;
+                }
                 var newBackParams = new List<KeyValuePair<string, string>>();
                 //newBackParam = 
                 //foreach (var p in cmdDetial.ParamNames)
@@ -120,6 +125,30 @@ namespace VicoldTerminal4Net
                 return true;
             }
             CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke("未找到命令，使用help查看所有命令。", CmdOutPutType.Error);
+            return false;
+        }
+
+        private bool CheckMode(ExecutableType executableType)
+        {
+            var isDebug = false;
+#if DEBUG
+            isDebug = true;
+#endif
+            switch (executableType)
+            {
+                case ExecutableType.All:
+                    return true;
+                case ExecutableType.Debug:
+                    return isDebug;
+                case ExecutableType.Release:
+                    return !isDebug;
+                case ExecutableType.Admin:
+                    return CmdTerminal.CurrentInternal.IsAdminMode;
+                case ExecutableType.Debug & ExecutableType.Admin:
+                    return isDebug & CmdTerminal.CurrentInternal.IsAdminMode;
+                case ExecutableType.Release & ExecutableType.Admin:
+                    return !isDebug & CmdTerminal.CurrentInternal.IsAdminMode;
+            }
             return false;
         }
 

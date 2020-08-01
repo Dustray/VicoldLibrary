@@ -30,6 +30,10 @@ namespace VicoldTerminal4Net
         /// </summary>
         internal Dictionary<string, string> ParamNames { get; set; }
         /// <summary>
+        /// 命令可执行类型
+        /// </summary>
+        internal ExecutableType CmdType { get; set; } = ExecutableType.All;
+        /// <summary>
         /// 添加参数
         /// </summary>
         /// <param name="parameter">参数名（添加时可不带“-”前缀）</param>
@@ -45,12 +49,22 @@ namespace VicoldTerminal4Net
             {
                 throw new CmdException($"已存在一个相同名称的参数：{parameter}。");
             }
-
             if (!parameter.StartsWith("-"))
             {
                 parameter = $"-{parameter}";
             }
-            ParamNames[parameter] = description??"";
+            ParamNames[parameter] = description ?? "";
+            return this;
+        }
+
+        /// <summary>
+        /// 设置命令可执行类型
+        /// </summary>
+        /// <param name="executableType">可执行类型</param>
+        /// <returns></returns>
+        public CmdDetailEtt SetExecutableType(ExecutableType executableType)
+        {
+            CmdType = executableType;
             return this;
         }
     }

@@ -41,16 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CmdDetailEtt.cs" />
-    <Compile Include="CmdException.cs" />
-    <Compile Include="CmdInterpreter.cs" />
-    <Compile Include="CmdOutPutType.cs" />
-    <Compile Include="CmdParams.cs" />
+    <Compile Include="Entities\CmdDetailEtt.cs" />
+    <Compile Include="Exceptions\CmdException.cs" />
+    <Compile Include="Interpreters\CmdInterpreter.cs" />
+    <Compile Include="Entities\CmdOutPutType.cs" />
+    <Compile Include="Entities\CmdParams.cs" />
     <Compile Include="CmdPool.cs" />
     <Compile Include="CmdQueue.cs" />
     <Compile Include="CmdTerminal.cs" />
+    <Compile Include="Entities\ExecutableType.cs" />
     <Compile Include="ICommander.cs" />
-    <Compile Include="ICmdInterpreter.cs" />
+    <Compile Include="Interpreters\ICmdInterpreter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

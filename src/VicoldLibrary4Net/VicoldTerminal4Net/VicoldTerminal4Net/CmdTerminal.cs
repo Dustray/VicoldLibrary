@@ -39,22 +39,17 @@ namespace VicoldTerminal4Net
         internal CmdQueue _commandQueue;
         private ICmdInterpreter _interpreter;
         internal Action<string, CmdOutPutType> InternalOutputCallback;
+        internal bool IsAdminMode = false;
+
+        #region 接口实现[ICommander]
+
         /// <summary>
         /// 添加命令
         /// </summary>
         /// <param name="order"></param>
         /// <param name="action"></param>
-        public CmdDetailEtt AddOrder(string order, Action<CmdParams> action)
-        {
-            //var detail = new CmdDetailEtt()
-            //{
-            //    Order = order,
-            //    Description = "",
-            //    Callback = action
-            //};
-            //_commandQueue.AddOrder(order, detail);
-            return AddOrder(order, "", action);
-        }
+        public CmdDetailEtt AddOrder(string order, Action<CmdParams> action) => AddOrder(order, "", action);
+
 
         /// <summary>
         /// 添加命令
@@ -79,10 +74,8 @@ namespace VicoldTerminal4Net
         /// <param name="order"></param>
         /// <param name="description"></param>
         /// <param name="action"></param>
-        internal void AddOrder(CmdDetailEtt detail)
-        {
-            _commandQueue.AddOrder(detail);
-        }
+        internal void AddOrder(CmdDetailEtt detail) => _commandQueue.AddOrder(detail);
+
         /// <summary>
         /// 尝试执行指定命令
         /// </summary>
@@ -96,15 +89,11 @@ namespace VicoldTerminal4Net
             var result = await _commandQueue.TryExecuteOrder(para);
             return result;
         }
-
         /// <summary>
-        /// 释放
+        /// 绑定内置输出器
         /// </summary>
-        public void Dispose()
-        {
-            _commandQueue.Dispose();
-        }
-
+        /// <param name="action"></param>
+        /// <returns></returns>
         public Task BindingInternalOutput(Action<string, CmdOutPutType> action)
         {
             InternalOutputCallback = action;
@@ -114,6 +103,22 @@ namespace VicoldTerminal4Net
                 AddOrder(order);
             }
             return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// 开启或关闭管理员模式（默认关闭）
+        /// </summary>
+        /// <param name="isActive">是否激活</param>
+        public void SetAdminMode(bool isActive) => IsAdminMode = isActive;
+
+        #endregion
+
+        /// <summary>
+        /// 释放
+        /// </summary>
+        public void Dispose()
+        {
+            _commandQueue.Dispose();
         }
     }
 }

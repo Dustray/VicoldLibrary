@@ -172,6 +172,7 @@ namespace VicoldTerminal4Net.Winform
 
         private void PresetCommand()
         {
+            CmdTerminal.Current.SetAdminMode(true);
             CmdTerminal.Current.AddOrder("clr", "清空日志区。", (cmdParams) =>
              {
                  HostInvoke(() =>
@@ -186,16 +187,16 @@ namespace VicoldTerminal4Net.Winform
                      Close();
                  });
              });
-#if DEBUIG
+#if DEBUG
             CmdTerminal.Current.AddOrder("test", "清空日志区。", (cmdParams) =>
             {
                 HostInvoke(() =>
                 {
-                    //logText.Clear();
+                    RecordLog("You execute TEST.");
                 });
             }).AddParam("a", "AAA")
              .AddParam("b", "BBB")
-             .AddParam("c", "CCC");
+             .AddParam("c", "CCC").SetExecutableType(ExecutableType.Admin& ExecutableType.Debug);
 #endif
         }
         private void TerminalBackCommand(string back, CmdOutPutType type)

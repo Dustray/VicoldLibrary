@@ -11,6 +11,9 @@ namespace VicoldTerminal4Net
     /// </summary>
     public class CmdParams
     {
+        /// <summary>
+        /// 构造方法
+        /// </summary>
         public CmdParams()
         {
             PairParams = new List<KeyValuePair<string, string>>();

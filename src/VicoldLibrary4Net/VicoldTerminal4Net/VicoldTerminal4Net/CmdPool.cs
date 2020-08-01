@@ -79,7 +79,18 @@ namespace VicoldTerminal4Net
                     CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke(output.ToString(), cmdOutPutType);
                 }
             }.AddParam("o", "Displays all commands containing input string and their arguments."));
-        }
 
+            OrderCollection.Add(new CmdDetailEtt()
+            {
+                Order = "cmode",
+                Description = "获取当前命令执行模式，当前命令列表及命令描述。",
+                Callback = (cmdParams) =>
+                {
+                    var mode = CmdTerminal.CurrentInternal.IsAdminMode ? "Admin" : "Normal";
+                    var msg = $"Current is {mode} Mode.";
+                    CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke(msg, CmdOutPutType.Info);
+                }
+            });
+        }
     }
 }

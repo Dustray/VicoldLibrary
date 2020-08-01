@@ -12,6 +12,11 @@ namespace VicoldTerminal4Net
     public interface ICommander : IDisposable
     {
         /// <summary>
+        /// 开启或关闭管理员模式（默认关闭）
+        /// </summary>
+        /// <param name="isActive">是否激活</param>
+        void SetAdminMode(bool isActive);
+        /// <summary>
         /// 添加命令
         /// </summary>
         /// <param name="order">命令</param>

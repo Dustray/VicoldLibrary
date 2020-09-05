@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VicoldTerminal4Net.Winform"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VicoldTerminal4Net", "VicoldTerminal4Net\VicoldTerminal4Net.csproj", "{83D4F795-53C0-40BB-8AD4-4467D260ABBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VicoldTerminal4Net.Winform.Mini", "VicoldTerminal4Net.Winform.Mini\VicoldTerminal4Net.Winform.Mini.csproj", "{3FCEF0F8-626E-42D7-B9C5-9B5160A055C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VicoldTerminal4Net.Test", "VicoldTerminal4Net.Test\VicoldTerminal4Net.Test.csproj", "{2BA8FDA8-FE80-49B7-A9D2-6A3D397A35EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{83D4F795-53C0-40BB-8AD4-4467D260ABBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83D4F795-53C0-40BB-8AD4-4467D260ABBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83D4F795-53C0-40BB-8AD4-4467D260ABBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FCEF0F8-626E-42D7-B9C5-9B5160A055C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FCEF0F8-626E-42D7-B9C5-9B5160A055C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FCEF0F8-626E-42D7-B9C5-9B5160A055C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FCEF0F8-626E-42D7-B9C5-9B5160A055C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BA8FDA8-FE80-49B7-A9D2-6A3D397A35EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BA8FDA8-FE80-49B7-A9D2-6A3D397A35EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BA8FDA8-FE80-49B7-A9D2-6A3D397A35EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA8FDA8-FE80-49B7-A9D2-6A3D397A35EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

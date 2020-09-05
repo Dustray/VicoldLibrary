@@ -17,6 +17,12 @@ namespace VicoldTerminal4Net
         {
             _commandQueue = new CmdQueue();
             _interpreter = new CmdInterpreter();
+            _cmdHistory = new CmdHistory();
+            var pool = new CmdPool().OrderCollection;
+            foreach (var order in pool)
+            {
+                AddOrder(order);
+            }
         }
 
         /// <summary>
@@ -38,6 +44,7 @@ namespace VicoldTerminal4Net
 
         internal CmdQueue _commandQueue;
         private ICmdInterpreter _interpreter;
+        private CmdHistory _cmdHistory;
         internal Action<string, CmdOutPutType> InternalOutputCallback;
         internal bool IsAdminMode = false;
 
@@ -84,11 +91,13 @@ namespace VicoldTerminal4Net
         /// <returns>执行结果：是否成功</returns>
         public async Task<bool> TryExecuteOrder(string orderLine, object customerContent = null)
         {
+            _cmdHistory.Add(orderLine);
             var para = _interpreter.Execute(orderLine);
             para.CustomerContent = customerContent;
             var result = await _commandQueue.TryExecuteOrder(para);
             return result;
         }
+
         /// <summary>
         /// 绑定内置输出器
         /// </summary>
@@ -97,11 +106,6 @@ namespace VicoldTerminal4Net
         public Task BindingInternalOutput(Action<string, CmdOutPutType> action)
         {
             InternalOutputCallback = action;
-            var pool = new CmdPool().OrderCollection;
-            foreach (var order in pool)
-            {
-                AddOrder(order);
-            }
             return Task.CompletedTask;
         }
 
@@ -120,5 +124,9 @@ namespace VicoldTerminal4Net
         {
             _commandQueue.Dispose();
         }
+
+        public string FlipHistoryUp() => _cmdHistory.FlipUp();
+
+        public string FlipHistoryDown() => _cmdHistory.FlipDown();
     }
 }

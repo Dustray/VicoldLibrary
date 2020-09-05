@@ -73,6 +73,7 @@
             this.logText.Location = new System.Drawing.Point(0, 0);
             this.logText.Multiline = true;
             this.logText.Name = "logText";
+            this.logText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.logText.Size = new System.Drawing.Size(596, 263);
             this.logText.TabIndex = 1;
             this.logText.TabStop = false;

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdHistory.cs" />
     <Compile Include="Entities\CmdDetailEtt.cs" />
     <Compile Include="Exceptions\CmdException.cs" />
     <Compile Include="Interpreters\CmdInterpreter.cs" />

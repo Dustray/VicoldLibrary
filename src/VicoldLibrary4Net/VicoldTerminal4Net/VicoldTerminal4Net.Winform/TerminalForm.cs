@@ -69,6 +69,14 @@ namespace VicoldTerminal4Net.Winform
                         return;
                     }
                     break;
+                case Keys.Up:
+                    var cmd = CmdTerminal.Current.FlipHistoryUp();
+                    inputText.Text = $"{_headStr}{cmd}";
+                    break;
+                case Keys.Down:
+                    var cmd1 = CmdTerminal.Current.FlipHistoryDown();
+                    inputText.Text = $"{_headStr}{cmd1}";
+                    break;
                 case Keys.Enter:
                     Send();
                     break;

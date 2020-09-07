@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>Vicold.Terminal4Net.Winform.Mini</id>
+    <version>1.0.0.1</version>
+    <title>VicoldTerminal4Net.Winform.Mini</title>
+    <authors>Dustray</authors>
+    <owners>Dustray</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://vicold.com/</projectUrl>
+    <iconUrl>https://image.dustray.cn/vicold/nuget.png</iconUrl>
+    <description>This is the command line terminal library Winform UI for .Net Framework.</description>
+    <releaseNotes>Init lib</releaseNotes>
+    <copyright>Copyright © 2020 vicold.com @dustray</copyright>
+    <tags>CMD Terminal</tags>
+  </metadata>
+</package>

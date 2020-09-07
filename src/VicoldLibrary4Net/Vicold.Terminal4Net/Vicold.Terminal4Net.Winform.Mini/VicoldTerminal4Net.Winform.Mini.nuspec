@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Dustray</authors>
+    <owners>Dustray</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://vicold.com/</projectUrl>
+    <iconUrl>https://image.dustray.cn/vicold/nuget.png</iconUrl>
+    <description>$description$</description>
+    <releaseNotes>Init lib</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>CMD Terminal</tags>
+  </metadata>
+</package>

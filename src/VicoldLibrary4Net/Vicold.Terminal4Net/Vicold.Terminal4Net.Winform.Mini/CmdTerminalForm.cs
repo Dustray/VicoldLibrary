@@ -48,9 +48,12 @@ namespace Vicold.Terminal4Net.Winform.Mini
             }
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public void Init()
         {
-            CmdTerminal.Current.SetAdminMode(true);
+            //CmdTerminal.Current.SetAdminMode(true);
             CmdTerminal.Current.AddOrder("clr", "清空日志区。", (cmdParams) =>
             {
                 _form?.HostInvoke(() =>
@@ -82,6 +85,14 @@ namespace Vicold.Terminal4Net.Winform.Mini
         internal void OnClose()
         {
             _form = null;
+        }
+
+        /// <summary>
+        /// 关闭窗体
+        /// </summary>
+        public void Close()
+        {
+            _form?.Close();
         }
     }
 }

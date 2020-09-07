@@ -125,6 +125,9 @@
   <data name="textInput.Font" type="System.Drawing.Font, System.Drawing">
     <value>宋体, 12pt</value>
   </data>
+  <data name="textInput.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
   <data name="textInput.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
@@ -199,6 +202,6 @@
     <value>TerminalFormMini</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Vicold.Terminal4Net.Winform.Mini.AdjustableNoneForm, Vicold.Terminal4Net.Winform.Mini, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Vicold.Terminal4Net.Winform.Mini.AdjustableNoneForm, Vicold.Terminal4Net.Winform.Mini, Version=1.0.0.3, Culture=neutral, PublicKeyToken=2fa8180261d92f66</value>
   </data>
 </root>

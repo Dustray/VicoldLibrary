@@ -7,16 +7,22 @@ using Vicold.Terminal4Net.Winform.Mini.Hook;
 
 namespace Vicold.Terminal4Net.Winform.Mini
 {
+    /// <summary>
+    /// 命令行mini窗体
+    /// </summary>
     public partial class TerminalFormMini : AdjustableNoneForm
     {
         private MouseHook _mouse = new MouseHook();
+
+        /// <summary>
+        /// 构造方法
+        /// </summary>
         public TerminalFormMini()
         {
             InitializeComponent();
             TopMost = true;
             CmdTerminal.Current.BindingInternalOutput(TerminalBackCommand);
-            textInput.ImeMode = ImeMode.Off;
-            InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(System.Globalization.CultureInfo.GetCultureInfo("en-US")) ?? InputLanguage.DefaultInputLanguage;
+            //InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(System.Globalization.CultureInfo.GetCultureInfo("en-US")) ?? InputLanguage.DefaultInputLanguage;
         }
 
         /// <summary>

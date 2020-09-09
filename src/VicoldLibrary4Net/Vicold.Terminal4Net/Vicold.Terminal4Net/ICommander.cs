@@ -15,7 +15,8 @@ namespace Vicold.Terminal4Net
         /// 开启或关闭管理员模式（默认关闭）
         /// </summary>
         /// <param name="isActive">是否激活</param>
-        void SetAdminMode(bool isActive);
+        /// <param name="adminPwd">管理员密码</param>
+        void SetAdminMode(bool isActive, string adminPwd = null);
 
         /// <summary>
         /// 添加命令

@@ -49,7 +49,7 @@ namespace Vicold.Terminal4Net.Winform.Mini
         }
 
         /// <summary>
-        /// 初始化
+        /// 初始化默认命令，请勿重复初始化
         /// </summary>
         public void Init()
         {
@@ -69,16 +69,16 @@ namespace Vicold.Terminal4Net.Winform.Mini
                 });
             });
 #if DEBUG
-            CmdTerminal.Current.AddOrder("test", "清空日志区。", (cmdParams) =>
-            {
-                _form?.HostInvoke(() =>
-                {
-                    _form?.RecordLog("You execute [TEST].");
-                });
-            }).SetExecutableType(ExecutableType.Admin & ExecutableType.Debug)
-             .AddParam("a", "AAA")
-             .AddParam("b", "BBB")
-             .AddParam("c", "CCC");
+            //CmdTerminal.Current.AddOrder("test", "清空日志区。", (cmdParams) =>
+            //{
+            //    _form?.HostInvoke(() =>
+            //    {
+            //        _form?.RecordLog("You execute [TEST].");
+            //    });
+            //}).SetExecutableType(ExecutableType.Admin & ExecutableType.Debug)
+            // .AddParam("a", "AAA")
+            // .AddParam("b", "BBB")
+            // .AddParam("c", "CCC");
 #endif
         }
 

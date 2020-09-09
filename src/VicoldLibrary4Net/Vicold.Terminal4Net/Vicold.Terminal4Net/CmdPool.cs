@@ -72,8 +72,8 @@ namespace Vicold.Terminal4Net
                         }
                         //if (index == 0)
                         //{
-                            //output.Append($"No command [{o.Key}] or starting with [{o.Key}] was found.");
-                            //cmdOutPutType = CmdOutPutType.Error;
+                        //output.Append($"No command [{o.Key}] or starting with [{o.Key}] was found.");
+                        //cmdOutPutType = CmdOutPutType.Error;
                         //}
                     }
                     CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke(output.ToString(), cmdOutPutType);
@@ -82,15 +82,45 @@ namespace Vicold.Terminal4Net
 
             OrderCollection.Add(new CmdDetailEtt()
             {
-                Order = "cmode",
+                Order = "admin",
                 Description = "获取当前命令执行模式，当前命令列表及命令描述。",
                 Callback = (cmdParams) =>
                 {
-                    var mode = CmdTerminal.CurrentInternal.IsAdminMode ? "Admin" : "Normal";
-                    var msg = $"Current is {mode} Mode.";
-                    CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke(msg, CmdOutPutType.Info);
+                    foreach (var param in cmdParams.PairParams)
+                    {
+                        if (param.Key == "-state")
+                        {
+                            var mode = CmdTerminal.CurrentInternal.IsAdminMode ? "Admin" : "Normal";
+                            var msg = $"Current is {mode} Mode.";
+                            CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke(msg, CmdOutPutType.Info);
+                        }
+
+                        if (param.Key == "-active")
+                        {
+                            if (CmdTerminal.CurrentInternal.AdminPwd == param.Value)
+                            {
+                                CmdTerminal.CurrentInternal.IsAdminModeActive = true;
+                                var msg = $"Admin mode has been activated.";
+                                CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke(msg, CmdOutPutType.Info);
+                            }
+                            else
+                            {
+                                var msg = $"Password Error.";
+                                CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke(msg, CmdOutPutType.Error);
+                            }
+                        }
+
+                        if (param.Key == "-unactive")
+                        {
+                            CmdTerminal.CurrentInternal.IsAdminModeActive = false;
+                            var msg = $"Admin mode has been unactivated.";
+                            CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke(msg, CmdOutPutType.Info);
+                        }
+                    }
                 }
-            });
+            }.AddParam("state", "查看当前状态")
+            .AddParam("active", "激活Admin模式")
+            .AddParam("unactive", "反激活Admin模式"));
         }
     }
 }

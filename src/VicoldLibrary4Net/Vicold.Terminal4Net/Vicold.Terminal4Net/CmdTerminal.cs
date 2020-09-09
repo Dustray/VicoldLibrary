@@ -47,6 +47,8 @@ namespace Vicold.Terminal4Net
         private CmdHistory _cmdHistory;
         internal Action<string, CmdOutPutType> InternalOutputCallback;
         internal bool IsAdminMode = false;
+        internal bool IsAdminModeActive = false;
+        internal string AdminPwd;
 
         #region 接口实现[ICommander]
 
@@ -113,8 +115,20 @@ namespace Vicold.Terminal4Net
         /// 开启或关闭管理员模式（默认关闭）
         /// </summary>
         /// <param name="isActive">是否激活</param>
-        public void SetAdminMode(bool isActive) => IsAdminMode = isActive;
+        /// <param name="adminPwd">管理员密码</param>
+        public void SetAdminMode(bool isActive, string adminPwd = null)
+        {
+            if (!isActive || string.IsNullOrWhiteSpace(adminPwd))
+            {
+                AdminPwd = null;
+            }
+            else
+            {
+                AdminPwd = adminPwd;
+            }
 
+            IsAdminMode = isActive;
+        }
         #endregion
 
         /// <summary>

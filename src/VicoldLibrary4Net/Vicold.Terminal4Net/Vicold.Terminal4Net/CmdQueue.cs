@@ -146,11 +146,23 @@ namespace Vicold.Terminal4Net
                 case ExecutableType.Release:
                     return !isDebug;
                 case ExecutableType.Admin:
-                    return CmdTerminal.CurrentInternal.IsAdminMode;
+                    return IsAdminAllow();
                 case ExecutableType.Debug & ExecutableType.Admin:
-                    return isDebug & CmdTerminal.CurrentInternal.IsAdminMode;
+                    return isDebug & IsAdminAllow();
                 case ExecutableType.Release & ExecutableType.Admin:
-                    return !isDebug & CmdTerminal.CurrentInternal.IsAdminMode;
+                    return !isDebug & IsAdminAllow();
+            }
+
+            bool IsAdminAllow()
+            {
+                if (CmdTerminal.CurrentInternal.IsAdminMode)
+                {
+                    return CmdTerminal.CurrentInternal.IsAdminModeActive;
+                }
+                else
+                {
+                    return true;
+                }
             }
             return false;
         }

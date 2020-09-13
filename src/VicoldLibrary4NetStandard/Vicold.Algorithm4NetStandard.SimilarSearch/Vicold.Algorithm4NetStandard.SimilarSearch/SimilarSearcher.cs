@@ -55,7 +55,7 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
             var minLength = Math.Min(SimilarArray.Length, si.SimilarArray.Length);
             for (var i = 0; i < minLength; i++)
             {
-                if (Math.Abs(SimilarArray[i] - si.SimilarArray[i]) < 30)
+                if (Math.Abs(SimilarArray[i] - si.SimilarArray[i]) < 20)
                 {
                     len++;
                 }

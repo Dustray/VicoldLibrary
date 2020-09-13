@@ -11,8 +11,9 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
     {
         static void Main(string[] args)
         {
-            var filePath = @"F:\照片\弯弯\IMG_2993.JPG";
-            var filePath2 = @"C:\Users\Dustray\Desktop\IMG_2994.JPG";
+            var filePath = @"F:\照片\弯弯\IMG_3006.JPG";
+            //var filePath2 = @"C:\Users\Dustray\Desktop\IMG_2994.JPG";
+            var filePath2 = @"F:\照片\弯弯\IMG_1037.JPG";
             var searcher1 = SimilarSearchLoader.Creator();
             var searcher2 = SimilarSearchLoader.Creator();
             string str1;
@@ -28,7 +29,7 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
             timewatcher.Start();
             using (var bitmap = new Bitmap(filePath))
             {
-                bytes1 = searcher1.GetEigenvalue(bitmap, PoolingType.Mean, precision: 16);
+                bytes1 = searcher1.GetEigenvalue(bitmap, PoolingType.Mean, precision: 10);
                 p1 = searcher1.GetPoolData();
                 str1 = System.Text.Encoding.Default.GetString(bytes1);
             }
@@ -80,9 +81,9 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
                 var searcher = SimilarSearchLoader.Creator();
                 using (var bitmap = new Bitmap(file))
                 {
-                    _ = searcher.GetEigenvalue(bitmap, PoolingType.Mean, precision: 16);
+                    _ = searcher.GetEigenvalue(bitmap, PoolingType.Mean, precision: 10);
                     var similar = searcher.GetSimilarity(sourceSearcher);
-                    if (similar > 0.75f)
+                    if (similar > 0.65f)
                     {
                         File.Copy(file, Path.GetFullPath($@"output\4\{similar}_{index}.jpg"));
                     }

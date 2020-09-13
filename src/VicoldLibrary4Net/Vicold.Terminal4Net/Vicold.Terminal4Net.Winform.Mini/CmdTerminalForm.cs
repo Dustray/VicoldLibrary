@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,7 +59,7 @@ namespace Vicold.Terminal4Net.Winform.Mini
             {
                 _form?.HostInvoke(() =>
                 {
-                    _form?.RecordLog("");
+                    _form?.RecordLog("", Color.Black);
                 });
             });
             CmdTerminal.Current.AddOrder("exit", "退出命令行工具。", (cmdParams) =>

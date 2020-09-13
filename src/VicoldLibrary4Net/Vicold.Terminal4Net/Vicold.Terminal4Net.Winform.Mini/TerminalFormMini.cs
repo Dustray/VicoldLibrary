@@ -103,15 +103,16 @@ namespace Vicold.Terminal4Net.Winform.Mini
 
             if (!string.IsNullOrWhiteSpace(orderStr))
             {
-                RecordLog(orderStr);
+                RecordLog(orderStr, Color.Black);
                 _ = await CmdTerminal.Current.TryExecuteOrder(orderStr);
             }
         }
 
-        internal void RecordLog(string log)
+        internal void RecordLog(string log, Color fontColor)
         {
             if (this.IsDisposed) return;
             textOutput.Clear();
+            textOutput.ForeColor = fontColor;
             textOutput.AppendText(log);
             HideOutputView(log);
         }
@@ -139,9 +140,25 @@ namespace Vicold.Terminal4Net.Winform.Mini
 
         private void TerminalBackCommand(string back, CmdOutPutType type)
         {
-            HostInvoke(() =>
+            Color color = Color.Black;
+            switch (type)
             {
-                RecordLog(back);
+                case CmdOutPutType.Debug:
+                    color = Color.Green;
+                    break;
+                case CmdOutPutType.Error:
+                    color = Color.Red;
+                    break;
+                case CmdOutPutType.Info:
+                    color = Color.Black;
+                    break;
+                case CmdOutPutType.Warning:
+                    color = Color.Orange;
+                    break;
+            }
+           HostInvoke(() =>
+            {
+                RecordLog(back, color);
             });
         }
         internal void HostInvoke(Action action)

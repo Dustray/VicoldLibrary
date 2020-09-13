@@ -23,6 +23,7 @@ namespace Vicold.Terminal4Net.Test
                  var pair = param.PairParams[0];
                  MessageBox.Show("dsdsdsds" + pair.Value);
              }).AddParam("-p", "文件路径");
+            CmdTerminal.Current.SetAdminMode(true);
         }
 
         private void button1_Click(object sender, EventArgs e)

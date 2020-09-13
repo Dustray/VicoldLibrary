@@ -88,14 +88,32 @@ namespace Vicold.Terminal4Net
                 {
                     foreach (var param in cmdParams.PairParams)
                     {
-                        if (param.Key == "-state")
+                        if (param.Key == "-s")
                         {
-                            var mode = CmdTerminal.CurrentInternal.IsAdminMode ? "Admin" : "Normal";
-                            var msg = $"Current is {mode} Mode.";
+                            string msg;
+                            if (CmdTerminal.CurrentInternal.IsAdminMode)
+                            {
+                                var isActivated = "NOT Activated";
+                                if (CmdTerminal.CurrentInternal.IsAdminModeActive)
+                                {
+                                    isActivated = "Activated";
+                                }
+
+                                msg = $"Current is Admin mode.({isActivated})";
+                                if (!string.IsNullOrWhiteSpace(CmdTerminal.CurrentInternal.AdminPwd))
+                                {
+                                    msg = $"{msg}\r\n  A password is required to execute the administrator command.";
+                                }
+                            }
+                            else
+                            {
+                                msg = "Current is Normal mode.";
+                            }
+
                             CmdTerminal.CurrentInternal.InternalOutputCallback?.Invoke(msg, CmdOutPutType.Info);
                         }
 
-                        if (param.Key == "-active")
+                        if (param.Key == "-a")
                         {
                             if (CmdTerminal.CurrentInternal.AdminPwd == param.Value)
                             {
@@ -110,7 +128,7 @@ namespace Vicold.Terminal4Net
                             }
                         }
 
-                        if (param.Key == "-unactive")
+                        if (param.Key == "-u")
                         {
                             CmdTerminal.CurrentInternal.IsAdminModeActive = false;
                             var msg = $"Admin mode has been unactivated.";
@@ -118,9 +136,9 @@ namespace Vicold.Terminal4Net
                         }
                     }
                 }
-            }.AddParam("state", "查看当前状态")
-            .AddParam("active", "激活Admin模式")
-            .AddParam("unactive", "反激活Admin模式"));
+            }.AddParam("s", "state查看当前状态")
+            .AddParam("a", "active激活Admin模式")
+            .AddParam("u", "unactive反激活Admin模式"));
         }
     }
 }

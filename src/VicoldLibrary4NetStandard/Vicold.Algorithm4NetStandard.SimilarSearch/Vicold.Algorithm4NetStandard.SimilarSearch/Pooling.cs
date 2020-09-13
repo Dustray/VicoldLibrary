@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Threading.Tasks;
 using Vicold.Algorithm4NetStandard.SimilarSearch.Utilities;
 
 namespace Vicold.Algorithm4NetStandard.SimilarSearch
@@ -25,18 +26,20 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
 
             // 倍数
             var multiple = _width / compressionWidth;
-            var result = new float[_width / multiple, _height / multiple];
-            for (int x = 0, cx = 0; x < _width; x += multiple, cx++)
+            var cWidth = _width / multiple;
+            var cHeight = _height / multiple;
+            var result = new float[cWidth, cHeight];
+            for (int cx = 0; cx < cWidth; cx++)
             {
-                for (int y = 0, cy = 0; y < _height; y += multiple, cy++)
+                for (int cy = 0; cy < cHeight; cy++)
                 {
                     if (poolingType == PoolingType.Mean)
                     {
-                        result[cx, cy] = PoolMean(data, x, multiple, y, multiple);
+                        result[cx, cy] = PoolMean(data, cx * multiple, multiple, cy * multiple, multiple);
                     }
                     else
                     {
-                        result[cx, cy] = PoolMax(data, x, multiple, y, multiple);
+                        result[cx, cy] = PoolMax(data, cx * multiple, multiple, cy * multiple, multiple);
                     }
                 }
             }
@@ -56,24 +59,32 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
 
             // 倍数
             var multiple = _width / compressionWidth;
-            var result = new float[(int)Math.Ceiling(_width / (float)multiple), (int)Math.Ceiling(_height / (float)multiple)];
+            var cWidth = (int)Math.Ceiling(_width / (float)multiple);
+            var cHeight = (int)Math.Ceiling(_height / (float)multiple);
+            var result = new float[cWidth, cHeight];
 
             var lockbmp = new LockBitmap4Pointer(bitmap);
             lockbmp.LockBits();
-            for (int x = 0, cx = 0; x < _width; x += multiple, cx++)
+
+            Parallel.For(0, cWidth, (cx) =>
             {
-                for (int y = 0, cy = 0; y < _height; y += multiple, cy++)
+
+            //for (int cx = 0; cx < cWidth; cx++)
+            //{
+                Parallel.For(0, cHeight, (cy) =>
                 {
+                //for (int cy = 0; cy < cHeight; cy++)
+                //{
                     if (poolingType == PoolingType.Mean)
                     {
-                        result[cx, cy] = PoolMean(lockbmp, x, multiple, y, multiple);
+                        result[cx, cy] = PoolMean(lockbmp, cx * multiple, multiple, cy * multiple, multiple);
                     }
                     else
                     {
-                        result[cx, cy] = PoolMax(lockbmp, x, multiple, y, multiple);
+                        result[cx, cy] = PoolMax(lockbmp, cx * multiple, multiple, cy * multiple, multiple);
                     }
-                }
-            }
+                });
+            });
 
             //从内存解锁Bitmap
             lockbmp.UnlockBits();
@@ -127,7 +138,7 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
             {
                 for (var y = startY; y < startY + yLength && y < _height; y++)
                 {
-                    result += bitmap.GetPixel(x, y).GetBrightness();
+                    result += bitmap.GetPixel(x, y).ToArgb();//.GetBrightness();
                     index++;
                 }
             }

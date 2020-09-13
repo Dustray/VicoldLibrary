@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -10,8 +11,8 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
     {
         static void Main(string[] args)
         {
-            var filePath = @"F:\照片\弯弯\IMG_0711.JPG";
-            var filePath2 = @"F:\照片\弯弯\IMG_2600.JPG";
+            var filePath = @"F:\照片\弯弯\IMG_2993.JPG";
+            var filePath2 = @"C:\Users\Dustray\Desktop\IMG_2994.JPG";
             var searcher1 = SimilarSearchLoader.Creator();
             var searcher2 = SimilarSearchLoader.Creator();
             string str1;
@@ -31,6 +32,9 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
                 p1 = searcher1.GetPoolData();
                 str1 = System.Text.Encoding.Default.GetString(bytes1);
             }
+            SearchPictures(searcher1);
+            Console.Read();
+            return;
             timewatcher.Stop();
             Console.WriteLine($"计算第一张图片特征值时间：{timewatcher.Elapsed}");
             timewatcher.Restart();
@@ -67,6 +71,27 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
             Console.Read();
         }
 
+        public static void SearchPictures(ISimilarSearcher sourceSearcher)
+        {
+            var files = Directory.GetFiles(@"F:\照片\弯弯","*.JPG");
+            var index = 0;
+            foreach (var file in files)
+            {
+                var searcher = SimilarSearchLoader.Creator();
+                using (var bitmap = new Bitmap(file))
+                {
+                    _ = searcher.GetEigenvalue(bitmap, PoolingType.Mean, precision: 16);
+                    var similar = searcher.GetSimilarity(sourceSearcher);
+                    if (similar > 0.75f)
+                    {
+                        File.Copy(file, Path.GetFullPath($@"output\1\{similar}_{index}.jpg"));
+                    }
+                    Console.WriteLine($"比较完成第{index}张，共{files.Length}张；相似度：{similar}");
+                }
+                index++;
+            }
+        }
+
         private static void SaveToImage(string filePath, float[,] data)
         {
             var width = data.GetLength(0);
@@ -77,9 +102,9 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
             {
                 for (var y = 0; y < height; y++)
                 {
-                    var a = Convert.ToInt32(data[x, y] * 255);
-                    bit.SetPixel(x, y, Color.FromArgb(255, a, a, a));
-                    //bit.SetPixel(x, y, Color.FromArgb((int)data[x, y]));
+                    //var a = Convert.ToInt32(data[x, y] * 255);
+                    //bit.SetPixel(x, y, Color.FromArgb(255, a, a, a));
+                    bit.SetPixel(x, y, Color.FromArgb((int)data[x, y]));
                     index++;
                 }
             }

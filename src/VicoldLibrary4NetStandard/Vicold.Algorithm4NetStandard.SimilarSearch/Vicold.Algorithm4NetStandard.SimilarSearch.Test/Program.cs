@@ -84,7 +84,7 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
                     var similar = searcher.GetSimilarity(sourceSearcher);
                     if (similar > 0.75f)
                     {
-                        File.Copy(file, Path.GetFullPath($@"output\1\{similar}_{index}.jpg"));
+                        File.Copy(file, Path.GetFullPath($@"output\4\{similar}_{index}.jpg"));
                     }
                     Console.WriteLine($"比较完成第{index}张，共{files.Length}张；相似度：{similar}");
                 }

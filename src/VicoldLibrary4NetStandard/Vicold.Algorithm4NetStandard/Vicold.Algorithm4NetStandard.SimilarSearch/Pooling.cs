@@ -74,7 +74,6 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
 
             Parallel.For(0, cWidth, (cx) =>
             {
-
                 //for (int cx = 0; cx < cWidth; cx++)
                 //{
                 Parallel.For(0, cHeight, (cy) =>

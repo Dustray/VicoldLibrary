@@ -66,17 +66,38 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
             {
                 for (var i = 0; i < minLength; i++)
                 {
-                    if (Math.Abs(SimilarArray[i] - si.SimilarArray[i]) < 20)
-                    {
-                        len++;
-                    }
+                    //if (Math.Abs(SimilarArray[i] - si.SimilarArray[i]) < 20)
+                    //{
+                    //    len++;
+                    //}
+                    var yihuo = SimilarArray[i] ^ si.SimilarArray[i];
+                    len += CountOne(yihuo);
                 }
+                return len / (float)SimilarArray.Length;
             }
             else
             {
+                var dataCount = minLength / 4;
+                for (var i = 0; i < dataCount; i++)
+                {
+                    //var yihuo = SimilarArray[i] ^ si.SimilarArray[i];
+                    //len += CountOne(yihuo);
+                    if (Math.Abs(SimilarArray[4 * i] - si.SimilarArray[4 * i]) > 40
+                        || Math.Abs(SimilarArray[4 * i + 1] - si.SimilarArray[4 * i + 1]) > 40
+                        || Math.Abs(SimilarArray[4 * i + 2] - si.SimilarArray[4 * i + 2]) > 40
+                        || Math.Abs(SimilarArray[4 * i + 3] - si.SimilarArray[4 * i + 3]) > 40)
+                    {
+                        continue;
+                    }
+                    len++;
+                    //if (SimilarArray[i] == si.SimilarArray[i])
+                    //{
+                    //    len++;
+                    //}
+                }
 
+                return len / (float)dataCount;
             }
-            return len / (float)SimilarArray.Length;
         }
 
         public float[,] GetPoolData()
@@ -90,6 +111,22 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
         public Point GetCompressionPoint()
         {
             return _compressionPoint;
+        }
+        public int CountOne(int n)
+        {
+            int count = 0;
+            int flag = 1;
+            int c = 0;
+            while (flag != 0 && c < 8)
+            {
+                if ((n & flag) == 0)
+                {
+                    count++;
+                }
+                flag = flag << 1;
+                c++;
+            }
+            return count;
         }
     }
 }

@@ -13,15 +13,15 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
         {
             var filePath = @"F:\照片\弯弯\IMG_3006.JPG";
             //var filePath2 = @"C:\Users\Dustray\Desktop\IMG_2994.JPG";
-            var filePath2 = @"F:\照片\弯弯\IMG_1037.JPG";
+            var filePath2 = @"F:\照片\弯弯\IMG_0686.JPG";
             var searcher1 = SimilarSearchLoader.Creator();
             var searcher2 = SimilarSearchLoader.Creator();
             string str1;
             string str2;
             byte[] bytes1;
             byte[] bytes2;
-            float[,] p1;
-            float[,] p2;
+            byte[,,] p1;
+            byte[,,] p2;
 
             var timewatcher = new Stopwatch();
             var timewatcherAll = new Stopwatch();
@@ -29,8 +29,8 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
             timewatcher.Start();
             using (var bitmap = new Bitmap(filePath))
             {
-                bytes1 = searcher1.GetEigenvalue(bitmap, PoolingType.Mean, precision: 10);
-                p1 = searcher1.GetPoolData();
+                bytes1 = searcher1.GetEigenvalue(bitmap, PoolingType.Mean, Color.Black, precision: 10);
+                p1 = searcher1.GetPoolColor();
                 str1 = System.Text.Encoding.Default.GetString(bytes1);
             }
             SearchPictures(searcher1);
@@ -42,8 +42,8 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
 
             using (var bitmap = new Bitmap(filePath2))
             {
-                bytes2 = searcher2.GetEigenvalue(bitmap, PoolingType.Mean, precision: 16);
-                p2 = searcher2.GetPoolData();
+                bytes2 = searcher2.GetEigenvalue(bitmap, PoolingType.Mean, Color.Black, precision: 10);
+                p2 = searcher2.GetPoolColor();
                 str2 = System.Text.Encoding.Default.GetString(bytes2);
             }
             timewatcher.Stop();
@@ -74,26 +74,34 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
 
         public static void SearchPictures(ISimilarSearcher sourceSearcher)
         {
-            var files = Directory.GetFiles(@"F:\照片\弯弯","*.JPG");
-            var index = 0;
-            foreach (var file in files)
+            var files = Directory.GetFiles(@"F:\照片\弯弯", "*.JPG");
+            var outputPath = Path.GetFullPath($@"output\7");
+            if (!Directory.Exists(outputPath))
             {
+                Directory.CreateDirectory(outputPath);
+            }
+
+            //var index =0;
+            // foreach (var f in files)
+            for (var index = 300; index < files.Length; index++)
+            {
+                var file = files[index];
                 var searcher = SimilarSearchLoader.Creator();
                 using (var bitmap = new Bitmap(file))
                 {
-                    _ = searcher.GetEigenvalue(bitmap, PoolingType.Mean, precision: 10);
+                    _ = searcher.GetEigenvalue(bitmap, PoolingType.Mean, Color.Black, precision: 10);
                     var similar = searcher.GetSimilarity(sourceSearcher);
-                    if (similar > 0.65f)
+                    if (similar >= 0.75f)
                     {
-                        File.Copy(file, Path.GetFullPath($@"output\4\{similar}_{index}.jpg"));
+                        File.Copy(file, $@"{outputPath}\{similar * 100}__{index}.jpg");
                     }
                     Console.WriteLine($"比较完成第{index}张，共{files.Length}张；相似度：{similar}");
-                }
-                index++;
+                }   
+                //index++;
             }
         }
 
-        private static void SaveToImage(string filePath, float[,] data)
+        private static void SaveToImage(string filePath, byte[,,] data)
         {
             var width = data.GetLength(0);
             var height = data.GetLength(1);
@@ -105,7 +113,7 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
                 {
                     //var a = Convert.ToInt32(data[x, y] * 255);
                     //bit.SetPixel(x, y, Color.FromArgb(255, a, a, a));
-                    bit.SetPixel(x, y, Color.FromArgb((int)data[x, y]));
+                    bit.SetPixel(x, y, Color.FromArgb(data[x, y, 0], data[x, y, 1], data[x, y, 2], data[x, y, 3]));
                     index++;
                 }
             }

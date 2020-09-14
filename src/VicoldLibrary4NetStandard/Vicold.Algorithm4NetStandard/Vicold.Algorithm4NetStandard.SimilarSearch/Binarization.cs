@@ -62,18 +62,18 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
             var sourceBytes = new byte[width * height * 4];
             var index = 0;
             byte no = 0;
-            byte yes = 0;
+            byte yes = 1;
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    sourceBytes[index] = data[x, y, 0] <= threshold.A ? no: yes;
+                    sourceBytes[index] = data[x, y, 0];// <= threshold.A ? no: yes;
                     index++;
-                    sourceBytes[index] = data[x, y, 1] <= threshold.R ? no: yes;
+                    sourceBytes[index] = data[x, y, 1];//<= threshold.R ? no: yes;
                     index++;
-                    sourceBytes[index] = data[x, y, 2] <= threshold.G ? no: yes;
+                    sourceBytes[index] = data[x, y, 2];//<= threshold.G ? no: yes;
                     index++;
-                    sourceBytes[index] = data[x, y, 3] <= threshold.B ? no: yes;
+                    sourceBytes[index] = data[x, y, 3];//<= threshold.B ? no: yes;
 
                     //var value = Normalize(data[x, y], max, min);
                     //sourceBytes[index] = Convert.ToByte(value * 255);

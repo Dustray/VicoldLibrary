@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace Vicold.Algorithm4NetStandard.SimilarSearch
 {
@@ -14,11 +12,11 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
         private Point _compressionPoint;
         internal DataType InputDataType;
 
-        public byte[] GetEigenvalue(float[,] data, PoolingType poolingType, int precision = 16, float threshold = 9999)
+        public byte[] GetEigenvalue(float[,] data, PoolingType poolingType, int precisionX = 16, int precisionY = 16, float threshold = 9999)
         {
             InputDataType = DataType.Data;
             var pool = new Pooling(InputDataType);
-            var poolData = pool.Execute(data, precision, poolingType);
+            var poolData = pool.Execute(data, precisionX, precisionY, poolingType);
             _compressionPoint = new Point(poolData.GetLength(0), poolData.GetLength(1));
             _poolData = poolData;
 
@@ -33,11 +31,11 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
             return eigenvalue;
         }
 
-        public byte[] GetEigenvalue(Bitmap bitmap, PoolingType poolingType, Color threshold, int precision = 16)
+        public byte[] GetEigenvalue(Bitmap bitmap, PoolingType poolingType, Color threshold, int precisionX = 16, int precisionY = 16)
         {
             InputDataType = DataType.Image;
             var pool = new Pooling(InputDataType);
-            var poolColor = pool.Execute(bitmap, precision, poolingType);
+            var poolColor = pool.Execute(bitmap, precisionX, precisionY, poolingType);
             _compressionPoint = new Point(poolColor.GetLength(0), poolColor.GetLength(1));
             _poolColor = poolColor;
 

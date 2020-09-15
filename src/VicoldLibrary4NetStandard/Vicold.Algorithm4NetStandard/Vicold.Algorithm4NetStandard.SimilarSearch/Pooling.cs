@@ -20,7 +20,7 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
         {
             _dataType = dataType;
         }
-        internal float[,] Execute(float[,] data, int compressionWidth, PoolingType poolingType)
+        internal float[,] Execute(float[,] data, int compressionWidth, int compressionHeight, PoolingType poolingType)
         {
             _width = data.GetLength(0);
             _height = data.GetLength(1);
@@ -29,11 +29,16 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
             {
                 return null;
             }
+            if (_height < compressionHeight)
+            {
+                return null;
+            }
 
             // 倍数
-            var multiple = _width / compressionWidth;
-            var cWidth = _width / multiple;
-            var cHeight = _height / multiple;
+            var multipleX = _width / compressionWidth;
+            var multipleY = _height / compressionHeight;
+            var cWidth = _width / multipleX;
+            var cHeight = _height / multipleY;
             var result = new float[cWidth, cHeight];
             for (int cx = 0; cx < cWidth; cx++)
             {
@@ -41,11 +46,11 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
                 {
                     if (poolingType == PoolingType.Mean)
                     {
-                        result[cx, cy] = PoolMean(data, cx * multiple, multiple, cy * multiple, multiple);
+                        result[cx, cy] = PoolMean(data, cx * multipleX, multipleX, cy * multipleY, multipleY);
                     }
                     else
                     {
-                        result[cx, cy] = PoolMax(data, cx * multiple, multiple, cy * multiple, multiple);
+                        result[cx, cy] = PoolMax(data, cx * multipleX, multipleX, cy * multipleY, multipleY);
                     }
                 }
             }
@@ -53,7 +58,7 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
             return result;
         }
 
-        internal byte[,,] Execute(Bitmap bitmap, int compressionWidth, PoolingType poolingType)
+        internal byte[,,] Execute(Bitmap bitmap, int compressionWidth, int compressionHeight, PoolingType poolingType)
         {
             _width = bitmap.Width;
             _height = bitmap.Height;
@@ -62,11 +67,16 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
             {
                 return null;
             }
+            if (_height < compressionHeight)
+            {
+                return null;
+            }
 
             // 倍数
-            var multiple = _width / compressionWidth;
-            var cWidth = (int)Math.Ceiling(_width / (float)multiple);
-            var cHeight = (int)Math.Ceiling(_height / (float)multiple);
+            var multipleX = _width / compressionWidth;
+            var multipleY = _height / compressionHeight;
+            var cWidth = (int)Math.Ceiling(_width / (float)multipleX);
+            var cHeight = (int)Math.Ceiling(_height / (float)multipleY);
             var result = new byte[cWidth, cHeight, 4];
 
             var lockbmp = new LockBitmap4Pointer(bitmap);
@@ -83,11 +93,11 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch
                     (byte a, byte r, byte g, byte b) data;
                     if (poolingType == PoolingType.Mean)
                     {
-                        data = PoolMean3(lockbmp, cx * multiple, multiple, cy * multiple, multiple);
+                        data = PoolMean3(lockbmp, cx * multipleX, multipleX, cy * multipleY, multipleY);
                     }
                     else
                     {
-                        data = PoolMax3(lockbmp, cx * multiple, multiple, cy * multiple, multiple);
+                        data = PoolMax3(lockbmp, cx * multipleX, multipleX, cy * multipleY, multipleY);
                     }
                     result[cx, cy, 0] = data.a;
                     result[cx, cy, 1] = data.r;

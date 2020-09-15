@@ -29,20 +29,20 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
             timewatcher.Start();
             using (var bitmap = new Bitmap(filePath))
             {
-                bytes1 = searcher1.GetEigenvalue(bitmap, PoolingType.Mean, Color.Black, precision: 10);
+                bytes1 = searcher1.GetEigenvalue(bitmap, PoolingType.Mean, Color.Black, precisionX: 10, precisionY: 10);
                 p1 = searcher1.GetPoolColor();
                 str1 = System.Text.Encoding.Default.GetString(bytes1);
             }
-            SearchPictures(searcher1);
-            Console.Read();
-            return;
+            //SearchPictures(searcher1);
+            //Console.Read();
+            //return;
             timewatcher.Stop();
             Console.WriteLine($"计算第一张图片特征值时间：{timewatcher.Elapsed}");
             timewatcher.Restart();
 
             using (var bitmap = new Bitmap(filePath2))
             {
-                bytes2 = searcher2.GetEigenvalue(bitmap, PoolingType.Mean, Color.Black, precision: 10);
+                bytes2 = searcher2.GetEigenvalue(bitmap, PoolingType.Mean, Color.Black, precisionX: 10, precisionY: 10);
                 p2 = searcher2.GetPoolColor();
                 str2 = System.Text.Encoding.Default.GetString(bytes2);
             }
@@ -66,9 +66,7 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
 
             timewatcherAll.Stop();
             Console.WriteLine($"总运行时间：{timewatcherAll.Elapsed}");
-
             Console.WriteLine($"\r\n相似比例：{similar}");
-
             Console.Read();
         }
 
@@ -89,7 +87,7 @@ namespace Vicold.Algorithm4NetStandard.SimilarSearch.Test
                 var searcher = SimilarSearchLoader.Creator();
                 using (var bitmap = new Bitmap(file))
                 {
-                    _ = searcher.GetEigenvalue(bitmap, PoolingType.Mean, Color.Black, precision: 10);
+                    _ = searcher.GetEigenvalue(bitmap, PoolingType.Mean, Color.Black, precisionX: 10, precisionY: 10);
                     var similar = searcher.GetSimilarity(sourceSearcher);
                     if (similar >= 0.75f)
                     {
